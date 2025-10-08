@@ -6,7 +6,68 @@
     <title>Furniture Ecommerce</title>
   </head>
   <body>
-    <div id="product-list"></div>
+    <nav>
+      <ul>
+        <li class="logo"><a href="#">CONCEPT</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        <li><a href="#">All</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+      <ul>
+        <li id="nav-cart"><a href="#">Cart(0)</a></li>
+      </ul>
+    </nav>
+    <nav class="sub-nav">
+      <ul>
+        <li><a href="#">LIVING</a></li>
+        <li><a href="#">BEDROOM</a></li>
+        <li><a href="#">KITCHEN</a></li>
+        <li><a href="#">DINING</a></li>
+        <li><a href="#">BATH</a></li>
+        <li><a href="#">OUTDOOR</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <h1 id="main-title">All Products</h1>
+      <!-- Sort By & Filter -->
+      <section id="product-nav">
+        <p class="result">List(<span id="result-count">0</span>)</p>
+        <label for="sort-by"
+          >Sort By: <span id="sort-order">New Arrival</span></label
+        >
+        <select name="sort-by" id="sort-by">
+          <option value="new-arrival">New Arrival</option>
+          <option value="top-rated">Top Rated</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A to Z</option>
+          <option value="name-desc">Name: Z to A</option>
+        </select>
+      </section>
+      <!-- Products List -->
+      <section class="products-list" id="product-grid">
+        <!-- Products will be dynamically inserted here -->
+        <div class="product-container">
+          <img src="https://via.placeholder.com/150" alt="Product Image" />
+          <div class="product-details">
+            <div>
+              <h2 class="product-name">Product Name</h2>
+              <p class="product-price">$99.99</p>
+            </div>
+            <div class="add-to-cart-btn">+</div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>
+        &copy; 2025 Furniture Ecommerce Design and Development By Julie Chou.
+        All rights reserved.
+      </p>
+    </footer>
   </body>
 </html>
 <script src="./main.js"></script>
