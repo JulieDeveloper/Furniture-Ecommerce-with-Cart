@@ -11,8 +11,8 @@
   </head>
   <body>
     <nav>
+      <div class="logo"><a href="#">CONCEPT</a></div>
       <ul>
-        <li class="logo"><a href="#">CONCEPT</a></li>
         <li><a href="#">Best Sellers</a></li>
         <li><a href="#">All</a></li>
         <li><a href="#">Categories</a></li>
@@ -37,18 +37,24 @@
     <main>
       <h1 class="page-title" id="main-title">All Products</h1>
       <!-- Sort By & Filter -->
-      <section id="product-nav">
+      <section class="products-bar">
         <p class="result">List(<span id="result-count">0</span>)</p>
-        <label for="sort-by"
-          >Sort By: <span id="sort-order">New Arrival</span></label
-        >
-        <select name="sort-by" id="sort-by-value">
-          <option value="new-arrival" default>New Arrival</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="name-asc">Name: A to Z</option>
-          <option value="name-desc">Name: Z to A</option>
-        </select>
+        <div class="sort-and-filter">
+          <input
+            class="filter-toggle"
+            type="checkbox"
+            name="filter-by"
+            id="filter-by-checkbox"
+          />
+          <label class="filter-label" for="filter-by-checkbox">Filter By</label>
+          <select class="sort-by" name="sort-by" id="sort-by-select">
+            <option value="new-arrival" default>Sort By : New Arrival</option>
+            <option value="price-asc">Sort By : Price(Low to High)</option>
+            <option value="price-desc">Sort By : Price(High to Low)</option>
+            <option value="name-asc">Sort By : Name(A to Z)</option>
+            <option value="name-desc">Sort By : Name(Z to A)</option>
+          </select>
+        </div>
       </section>
       <!-- Products List -->
       <section class="products-list" id="product-grid">
@@ -57,7 +63,7 @@
           <img src="https://via.placeholder.com/150" alt="Product Image" />
           <div class="product-details">
             <div>
-              <h2 class="product-name">Product Name</h2>
+              <p class="product-name">Product Name</p>
               <p class="product-price">$99.99</p>
             </div>
             <div class="add-to-cart-btn">+</div>

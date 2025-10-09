@@ -4,7 +4,7 @@ let rawProducts = [];
 
 // HTML elements: 
 const productsList_HTML = document.getElementById('product-grid');
-const sortBy_HTML = document.getElementById('sort-by-value');
+const sortBy_HTML = document.getElementById('sort-by-select');
 const sortOrder_HTML = document.getElementById('sort-order');
 const resultCount_HTML = document.getElementById('result-count');
 
@@ -54,7 +54,6 @@ const renderProducts = (products) => {
 // Handle Sort By Change
 sortBy_HTML.addEventListener('change', (e) => {
     sortedBy = e.target.value;
-    sortOrder_HTML.textContent = e.target.options[e.target.selectedIndex].text;
     console.log('Sort by:', sortedBy);
 
     switch (sortedBy) {
