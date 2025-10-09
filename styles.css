@@ -34,12 +34,17 @@ a {
 
 /* Navigation Bar Styles */
 nav {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   border-bottom: 2px solid #000;
 }
+
 div.logo {
   font-family: "Staatliches", sans-serif;
   font-weight: 400;
@@ -59,8 +64,36 @@ li {
   padding: 0 20px;
 }
 
+li a {
+  font-size: 1.2rem;
+}
+
+div.sub-nav {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 2px solid #000;
+  visibility: hidden;
+}
+
 .sub-nav ul {
   margin: 0 auto;
+}
+
+/* TODO: the hover effect is not working when hover outside of the category li */
+#categories-li:hover .sub-nav,
+.sub-nav:hover {
+  visibility: visible;
+}
+
+main {
+  margin-top: 120px;
 }
 
 /* Product bar */
@@ -121,4 +154,35 @@ section.products-list {
   justify-content: space-between;
   align-items: center;
   padding: 20px 10px;
+}
+
+/* Product Modal ---------------------------------------------------------*/
+.product-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  display: none;
+}
+.product-modal .product-img {
+  width: 50%;
+  height: 100%;
+  background: black;
+}
+.product-modal .container {
+  width: 50%;
+  background: white;
+}
+
+/* top bar --------------*/
+.product-modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 3rem;
 }
