@@ -88,67 +88,76 @@
         </div>
         <!-- main ----------------------------->
         <!-- path bar -->
-        <div class="path-bar">
-          <a href="#" class="path-link">All</a>
-          <p>></p>
-          <a href="#" class="path-link">Lamp</a>
-        </div>
-        <!-- name -->
-        <h2 class="product-name">Product Name</h2>
-        <!--  details ----------------------------->
-        <!-- price -->
-        <div class="row">
-          <p>Price</p>
-          <p>$99.99</p>
-        </div>
-        <!-- description -->
-        <div class="row-can-collapse">
-          <input
-            type="checkbox"
-            name="collapse-toggle"
-            id="description-toggle"
-          />
-          <label for="description-toggle" class="collapse-label"
-            >Show more</label
-          >
-          <p>Description</p>
-          <p>this is a long long long description of the product.</p>
-        </div>
-        <!-- Specification -->
-        <div class="row-can-collapse">
-          <input
-            type="checkbox"
-            name="collapse-toggle"
-            id="specification-toggle"
-          />
-          <label for="specification-toggle" class="collapse-label"
-            >Show more</label
-          >
-          <p>Specification</p>
-          <div class="flex">
-            <div class="spec-item">
-              <p class="spec-key">Wood Type/Finish</p>
-              <p class="spec-value">Oak/Walnut</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-key">Dimension</p>
-              <p class="spec-value">D19 x W23 x H50</p>
-            </div>
-            <div class="spec-item">
-              <p class="spec-key">Weight</p>
-              <p class="spec-value">300</p>
-            </div>
-          </div>
-        </div>
-        <div class="in-low-stock"><p></p></div>
-        <!-- bottom ----------------------------->
         <div>
-          <div class="quantity-selector">
-            <button class="decrease-btn">-</button>
-            <input type="number" class="quantity-input" value="1" min="1" />
-            <button class="increase-btn">+</button>
+          <div class="path-bar">
+            <a href="#" class="path-link">All</a>
+            <p>></p>
+            <a href="#" class="path-link">Lamp</a>
           </div>
-          <button class="add-to-cart-modal-btn">Add to Cart</button>
+          <!-- name -->
+          <h2 class="product-name">Product Name</h2>
+          <!--  details ----------------------------->
+          <!-- price -->
+          <div class="row">
+            <p class="row-label">Price</p>
+            <p>$99.99</p>
+          </div>
+          <!-- description -->
+          <div class="row-can-collapse">
+            <p class="row-label">Description</p>
+            <input
+              type="checkbox"
+              name="collapse-toggle"
+              id="description-toggle"
+            />
+            <label for="description-toggle" class="collapse-label"
+              ><img src="./assets/collapse-icon.svg" alt="collapse icon"
+            /></label>
+            <div class="row-content">
+              <p>this is a long long long description of the product.</p>
+            </div>
+          </div>
+          <!-- Specification -->
+          <div class="row-can-collapse">
+            <p class="row-label">Specification</p>
+            <input
+              type="checkbox"
+              name="collapse-toggle"
+              id="specification-toggle"
+            />
+            <label for="specification-toggle" class="collapse-label">
+              <img src="./assets/collapse-icon.svg" alt="collapse icon"
+            /></label>
+            <div class="row-content specification">
+              <div class="spec-item">
+                <p class="spec-key">Wood Type/Finish</p>
+                <p class="spec-value">Oak/Walnut</p>
+              </div>
+              <div class="spec-item">
+                <p class="spec-key">Dimension</p>
+                <p class="spec-value">D19 x W23 x H50</p>
+              </div>
+              <div class="spec-item">
+                <p class="spec-key">Weight</p>
+                <p class="spec-value">300</p>
+              </div>
+            </div>
+          </div>
+          <!-- bottom ----------------------------->
+          <div class="bottom-bar">
+            <div class="quantity-selector">
+              <button class="decrease-btn">–</button>
+              <input
+                type="number"
+                id="quantity-input"
+                class="quantity-input"
+                value="1"
+                min="1"
+              />
+              <button class="increase-btn">+</button>
+            </div>
+            <button class="add-to-cart-modal-btn">ADD TO CART</button>
+          </div>
         </div>
       </div>
     </section>

@@ -43,6 +43,7 @@ nav {
   align-items: center;
   padding: 0 10px;
   border-bottom: 2px solid #000;
+  background-color: #fff;
 }
 
 div.logo {
@@ -90,14 +91,13 @@ div.sub-nav {
   margin: 0 auto;
 }
 
-/* TODO: the hover effect is not working when hover outside of the category li */
 #categories-li:hover .sub-nav,
 .sub-nav:hover {
   visibility: visible;
 }
 
 main {
-  margin-top: 120px;
+  margin-top: 200px;
 }
 
 /* Product bar */
@@ -170,7 +170,7 @@ section.products-list {
   width: 100vw;
   height: 100vh;
   display: flex;
-  display: none;
+  /* display: none; */
 }
 .product-modal .product-img {
   width: 50%;
@@ -180,13 +180,149 @@ section.products-list {
 .product-modal .container {
   width: 50%;
   background: white;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* top bar --------------*/
+.top-bar {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.status-box {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  align-items: center;
+  border: 1px solid #898989;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+.status-box .circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 3px solid rgb(255, 11, 11);
+}
+
+.status-box .status-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .product-modal .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 20px;
+  /* position: absolute; */
+  /* top: 10px;
+  right: 20px; */
   cursor: pointer;
   font-size: 3rem;
+}
+
+/* Main ----------------------- */
+/* path bar */
+.path-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* margin-top: 200px; */
+  padding: 0 20px;
+}
+
+.product-modal .product-name {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.product-modal .row,
+.product-modal .row-can-collapse {
+  border-top: 2px solid #000;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+.row-label {
+  font-weight: 700;
+}
+.row .row-label {
+  width: 50%;
+}
+
+.row-can-collapse {
+  flex-wrap: wrap;
+}
+
+.row-can-collapse p {
+  margin-right: auto;
+}
+
+.row-can-collapse .row-content {
+  width: 100%;
+  margin-top: 20px;
+}
+.row-can-collapse .row-content.specification {
+  width: 100%;
+  display: flex;
+}
+.spec-item {
+  margin-right: 40px;
+}
+.spec-key {
+  opacity: 0.5;
+  margin-bottom: 6px;
+}
+
+.row-can-collapse input {
+  display: none;
+}
+/* hide row content */
+.row-can-collapse input:checked ~ .collapse-label {
+  transform: rotate(180deg);
+}
+
+.row-can-collapse input:checked ~ div.row-content {
+  display: none;
+}
+
+.product-modal .bottom-bar {
+  display: flex;
+  height: 80px;
+  border-top: 2px solid #000;
+}
+
+.product-modal .quantity-selector {
+  width: 50%;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #000;
+}
+.product-modal .quantity-selector input {
+  font-size: 3rem;
+  width: 60px;
+  border: none;
+  text-align: center;
+}
+.product-modal .quantity-selector button {
+  font-size: 3rem;
+  width: 60px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.product-modal .add-to-cart-modal-btn {
+  width: 50%;
+  color: white;
+  background: black;
+  font-size: 2rem;
 }
