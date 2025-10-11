@@ -326,3 +326,134 @@ section.products-list {
   background: black;
   font-size: 2rem;
 }
+
+/* filter menu */
+.filter-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  border: 2px solid #000;
+  z-index: 10;
+  overflow: hidden;
+}
+.filter-menu .filter-header {
+  height: 60px;
+  border-bottom: 1px solid #000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #000;
+}
+.filter-menu .filter-options {
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+.filter-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+.filter-menu .filter-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  margin-right: 40px;
+}
+
+/* Custom summary dropdown icon (uses assets/collapse-icon.svg) */
+.filter-menu summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-bottom: 1px solid #000;
+  list-style: none; /* fallback */
+}
+
+/* Hide native marker in WebKit and other browsers */
+.filter-menu summary::-webkit-details-marker {
+  display: none;
+}
+.filter-menu summary::marker {
+  display: none;
+}
+
+/* Inject custom icon using a pseudo-element */
+.filter-menu summary::after {
+  content: "";
+  width: 20px;
+  height: 12px;
+  background-image: url("assets/collapse-icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: transform 0.18s ease;
+  transform-origin: center;
+  cursor: pointer;
+}
+
+/* Rotate icon when the details element is open */
+.filter-menu details[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+/* Tidy up nested options */
+.nested-options {
+  width: 100%;
+  padding: 8px 24px 16px 24px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.nested-options li {
+  width: 100%;
+
+  padding: 6px 0;
+  padding-left: 50px;
+}
+#wood-dropdown li,
+#finish-dropdown li {
+  padding-left: 0px;
+}
+
+details {
+  border-bottom: 1px solid #000;
+}
+details[open] > summary {
+  border-bottom: 1px solid #000;
+}
+
+#category-dropdown[open] > summary,
+#wood-dropdown[open] > summary,
+#finish-dropdown[open] > summary {
+  font-weight: 700;
+}
+details.filter-dropdown summary {
+  padding-left: 45px;
+}
+
+.filter-btns {
+  height: 60px;
+  display: flex;
+}
+
+.filter-btn {
+  width: 50%;
+  border: 2px solid #000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.filter-btn.apply {
+  background: black;
+  color: white;
+}
+.filter-btn.clear {
+  background: rgb(255, 255, 255);
+  color: black;
+}

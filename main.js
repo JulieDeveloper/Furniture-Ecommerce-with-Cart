@@ -101,5 +101,24 @@ modalCloseBtn.addEventListener('click', () => {
     closeModal()
 });
 
+
+// handle Filter Menu Toggle
+const filterMenuCheckbox_HTML = document.getElementById('filter-by-checkbox');
+const filterMenu_HTML = document.getElementById('filter-menu');
+
+filterMenuCheckbox_HTML.addEventListener('change', (e) => {
+    const isChecked = e.target.checked;
+    console.log('Filter menu checkbox changed:', isChecked);
+
+    // Toggle Filter Menu Display
+    if (isChecked) {
+        filterMenu_HTML.style.right = '0';
+    } else {
+        filterMenu_HTML.style.right = '-400px';
+    }
+});
+
+
+
 // Initial Fetch
 fetchProducts(fetchURL);

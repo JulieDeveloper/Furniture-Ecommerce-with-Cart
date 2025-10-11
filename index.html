@@ -42,6 +42,8 @@
       <section class="products-bar">
         <p class="result">List(<span id="result-count">0</span>)</p>
         <div class="sort-and-filter">
+          <!-- filter btn-->
+
           <input
             class="filter-toggle"
             type="checkbox"
@@ -49,6 +51,7 @@
             id="filter-by-checkbox"
           />
           <label class="filter-label" for="filter-by-checkbox">Filter By</label>
+          <!-- sort btn -->
           <select class="sort-by" name="sort-by" id="sort-by-select">
             <option value="new-arrival" default>Sort By : New Arrival</option>
             <option value="price-asc">Sort By : Price(Low to High)</option>
@@ -73,6 +76,347 @@
         </div>
       </section>
     </main>
+
+    <!-- Filter Menu -->
+    <aside class="filter-menu" id="filter-menu" aria-label="Product filters">
+      <div class="filter-header">
+        <h2>FILTER BY</h2>
+      </div>
+
+      <div class="filter-options">
+        <!-- Parent Category dropdown that nests each sub-category -->
+        <details class="filter-group-dropdown" id="category-dropdown" open>
+          <summary>
+            <span class="summary-label category-main">Category</span>
+          </summary>
+
+          <div class="filter-group" role="group" aria-label="Category subgroups">
+
+          <!-- Living Room -->
+          <details class="filter-dropdown" open>
+            <summary>
+              <span class="summary-label">Living Room</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-living-sofa">
+                  <input id="cat-living-sofa" type="checkbox" name="category[]" value="living:sofa" />
+                  Sofa
+                </label>
+              </li>
+              <li>
+                <label for="cat-living-chair">
+                  <input id="cat-living-chair" type="checkbox" name="category[]" value="living:chair" />
+                  Chair
+                </label>
+              </li>
+              <li>
+                <label for="cat-living-tvtable">
+                  <input id="cat-living-tvtable" type="checkbox" name="category[]" value="living:tv-table" />
+                  TV Table
+                </label>
+              </li>
+              <li>
+                <label for="cat-living-lamp">
+                  <input id="cat-living-lamp" type="checkbox" name="category[]" value="living:lamp" />
+                  Lamp
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Bedroom -->
+          <details class="filter-dropdown">
+            <summary>
+              <span class="summary-label">Bedroom</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-bedroom-mattress">
+                  <input id="cat-bedroom-mattress" type="checkbox" name="category[]" value="bedroom:mattress" />
+                  Mattress
+                </label>
+              </li>
+              <li>
+                <label for="cat-bedroom-wardrobe">
+                  <input id="cat-bedroom-wardrobe" type="checkbox" name="category[]" value="bedroom:wardrobe" />
+                  Wardrobe
+                </label>
+              </li>
+              <li>
+                <label for="cat-bedroom-mirror">
+                  <input id="cat-bedroom-mirror" type="checkbox" name="category[]" value="bedroom:mirror" />
+                  Mirror
+                </label>
+              </li>
+              <li>
+                <label for="cat-bedroom-lamp">
+                  <input id="cat-bedroom-lamp" type="checkbox" name="category[]" value="bedroom:lamp" />
+                  Lamp
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Kitchen / Dining -->
+          <details class="filter-dropdown">
+            <summary>
+              <span class="summary-label">Kitchen / Dining</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-kitchen">
+                  <input id="cat-kitchen" type="checkbox" name="category[]" value="kitchen:kitchen" />
+                  Kitchen
+                </label>
+              </li>
+              <li>
+                <label for="cat-kitchen-table">
+                  <input id="cat-kitchen-table" type="checkbox" name="category[]" value="kitchen:table" />
+                  Table
+                </label>
+              </li>
+              <li>
+                <label for="cat-kitchen-chairs">
+                  <input id="cat-kitchen-chairs" type="checkbox" name="category[]" value="kitchen:chairs" />
+                  Chairs
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Office -->
+          <details class="filter-dropdown">
+            <summary>
+              <span class="summary-label">Office</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-office-desk">
+                  <input id="cat-office-desk" type="checkbox" name="category[]" value="office:desk" />
+                  Desk
+                </label>
+              </li>
+              <li>
+                <label for="cat-office-chair">
+                  <input id="cat-office-chair" type="checkbox" name="category[]" value="office:chair" />
+                  Chair
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Bathroom -->
+          <details class="filter-dropdown">
+            <summary>
+              <span class="summary-label">Bathroom</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-bath-vanity">
+                  <input id="cat-bath-vanity" type="checkbox" name="category[]" value="bathroom:vanity" />
+                  Vanity
+                </label>
+              </li>
+              <li>
+                <label for="cat-bath-mirror">
+                  <input id="cat-bath-mirror" type="checkbox" name="category[]" value="bathroom:mirror" />
+                  Mirror
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          <!-- Outdoor / Garden -->
+          <details class="filter-dropdown">
+            <summary>
+              <span class="summary-label">Outdoor / Garden</span>
+            </summary>
+            <ul class="nested-options">
+              <li>
+                <label for="cat-outdoor-garden">
+                  <input id="cat-outdoor-garden" type="checkbox" name="category[]" value="outdoor:garden" />
+                  Garden
+                </label>
+              </li>
+            </ul>
+          </details>
+
+          </div>
+        </details>
+        
+        <!-- WOOD TYPE -->
+        <!-- walnut','maple','oak','pine','eucalyptus','bamboo','teak','cedar -->
+        <details class="filter-group-dropdown" id="wood-dropdown" open>
+          <summary>
+            <span class="summary-label wood-main">Wood Type</span>
+          </summary>
+          <ul class="nested-options">
+              <li>
+                <label for="wood-walnut">
+                  <input id="wood-walnut" type="checkbox" name="wood[]" value="walnut" />
+                  Walnut
+                </label>
+              </li>
+              <li>
+                <label for="wood-maple">
+                  <input id="wood-maple" type="checkbox" name="wood[]" value="maple" />
+                  Maple
+                </label>
+              </li>
+              <li>
+                <label for="wood-oak">
+                  <input id="wood-oak" type="checkbox" name="wood[]" value="oak" />
+                  Oak
+                </label>
+              </li>
+              <li>
+                <label for="wood-pine">
+                  <input id="wood-pine" type="checkbox" name="wood[]" value="pine" />
+                  Pine
+                </label>
+              </li>
+              <li>
+                <label for="wood-eucalyptus">
+                  <input id="wood-eucalyptus" type="checkbox" name="wood[]" value="eucalyptus" />
+                  Eucalyptus
+                </label>
+              </li>
+               <li>
+                <label for="wood-bamboo">
+                  <input id="wood-bamboo" type="checkbox" name="wood[]" value="bamboo" />
+                  Bamboo
+                </label>
+              </li>
+                <li>
+                  <label for="wood-teak">
+                    <input id="wood-teak" type="checkbox" name="wood[]" value="teak" />
+                    Teak
+                  </label>
+                </li>
+                <li>
+                  <label for="wood-cedar">
+                    <input id="wood-cedar" type="checkbox" name="wood[]" value="cedar" />
+                    Cedar
+                  </label>  
+                </li>
+            </ul>
+        </details>
+
+         <!-- Finish TYPE -->
+        <!-- 'dark', 'medium', 'light', 'natural' -->
+        <details class="filter-group-dropdown" id="finish-dropdown" open>
+          <summary>
+            <span class="summary-label finish-main">Finish Type</span>
+          </summary>
+          <ul class="nested-options">
+              <li>
+                <label for="finish-dark">
+                  <input id="finish-dark" type="checkbox" name="finish[]" value="dark" />
+                  Dark
+                </label>
+              </li>
+              <li>
+                <label for="finish-medium">
+                  <input id="finish-medium" type="checkbox" name="finish[]" value="medium" />
+                  Medium
+                </label>
+              </li>
+              <li>
+                <label for="finish-light">
+                  <input id="finish-light" type="checkbox" name="finish[]" value="light" />
+                  Light
+                </label>
+              </li>
+              <li>
+                <label for="finish-natural">
+                  <input id="finish-natural" type="checkbox" name="finish[]" value="natural" />
+                  Natural
+                </label>
+              </li>
+            </ul>
+        </details>
+      </div>
+      <div class="filter-btns">
+        <button id="apply-filters-btn" class="filter-btn apply">Apply</button>
+        <button id="clear-filters-btn" class="filter-btn clear">Clear</button>
+      </div>
+    </aside>
+
+    <!-- Modal -->
+    <section id="product-modal" class="product-modal">
+    <!-- img -->
+      <div class="product-img" id="modal-product-img" ></div>
+      <div class="container">
+        <!-- top bar ----------------------------->
+        <div class="top-bar">
+          <div class="status-box">
+            <span class="circle"></span>
+            <p class="status-text">In Stock</p>
+          </div>
+          <div class="close-btn" id="close-modal-btn">X</div>
+        </div>
+        <!-- main ----------------------------->
+        <div id="modal-product-main">
+          <!-- Product details will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+    <footer>
+      <p>
+        &copy; 2025 Furniture Ecommerce Design and Development By Julie Chou.
+        All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>
+<script src="main.js" type="module"></script>
+<!-- <script src="./productModal.js"></script> -->
+
+                  Maple
+                </label>
+              </li>
+              <li>
+                <label for="wood-oak">
+                  <input id="wood-oak" type="checkbox" name="wood[]" value="oak" />
+                  Oak
+                </label>
+              </li>
+              <li>
+                <label for="wood-pine">
+                  <input id="wood-pine" type="checkbox" name="wood[]" value="pine" />
+                  Pine
+                </label>
+              </li>
+              <li>
+                <label for="wood-eucalyptus">
+                  <input id="wood-eucalyptus" type="checkbox" name="wood[]" value="eucalyptus" />
+                  Eucalyptus
+                </label>
+              </li>
+               <li>
+                <label for="wood-bamboo">
+                  <input id="wood-bamboo" type="checkbox" name="wood[]" value="bamboo" />
+                  Bamboo
+                </label>
+              </li>
+                <li>
+                  <label for="wood-teak">
+                    <input id="wood-teak" type="checkbox" name="wood[]" value="teak" />
+                    Teak
+                  </label>
+                </li>
+                <li>
+                  <label for="wood-cedar">
+                    <input id="wood-cedar" type="checkbox" name="wood[]" value="cedar" />
+                    Cedar
+                  </label>  
+                </li>
+            </ul>
+        </details>
+      </div>
+    </aside>
+
     <!-- Modal -->
     <section id="product-modal" class="product-modal">
     <!-- img -->
