@@ -62,21 +62,21 @@
       <section class="products-list" id="product-grid">
         <!-- Products will be dynamically inserted here -->
         <div class="product-card">
-          <img src="https://via.placeholder.com/150" alt="Product Image" />
+          <!-- <img src="https://via.placeholder.com/150" alt="Product Image" />
           <div class="product-details">
             <div>
               <p class="product-name">Product Name</p>
               <p class="product-price">$99.99</p>
             </div>
-            <div class="add-to-cart-btn">+</div>
+            <div class="add-to-cart-btn">+</div> -->
           </div>
         </div>
       </section>
     </main>
     <!-- Modal -->
-    <section class="product-modal">
-      <!-- img -->
-      <div class="product-img"></div>
+    <section id="product-modal" class="product-modal">
+    <!-- img -->
+      <div class="product-img" id="modal-product-img" ></div>
       <div class="container">
         <!-- top bar ----------------------------->
         <div class="top-bar">
@@ -84,80 +84,11 @@
             <span class="circle"></span>
             <p class="status-text">In Stock</p>
           </div>
-          <div class="close-btn">X</div>
+          <div class="close-btn" id="close-modal-btn">X</div>
         </div>
         <!-- main ----------------------------->
-        <!-- path bar -->
-        <div>
-          <div class="path-bar">
-            <a href="#" class="path-link">All</a>
-            <p>></p>
-            <a href="#" class="path-link">Lamp</a>
-          </div>
-          <!-- name -->
-          <h2 class="product-name">Product Name</h2>
-          <!--  details ----------------------------->
-          <!-- price -->
-          <div class="row">
-            <p class="row-label">Price</p>
-            <p>$99.99</p>
-          </div>
-          <!-- description -->
-          <div class="row-can-collapse">
-            <p class="row-label">Description</p>
-            <input
-              type="checkbox"
-              name="collapse-toggle"
-              id="description-toggle"
-            />
-            <label for="description-toggle" class="collapse-label"
-              ><img src="./assets/collapse-icon.svg" alt="collapse icon"
-            /></label>
-            <div class="row-content">
-              <p>this is a long long long description of the product.</p>
-            </div>
-          </div>
-          <!-- Specification -->
-          <div class="row-can-collapse">
-            <p class="row-label">Specification</p>
-            <input
-              type="checkbox"
-              name="collapse-toggle"
-              id="specification-toggle"
-            />
-            <label for="specification-toggle" class="collapse-label">
-              <img src="./assets/collapse-icon.svg" alt="collapse icon"
-            /></label>
-            <div class="row-content specification">
-              <div class="spec-item">
-                <p class="spec-key">Wood Type/Finish</p>
-                <p class="spec-value">Oak/Walnut</p>
-              </div>
-              <div class="spec-item">
-                <p class="spec-key">Dimension</p>
-                <p class="spec-value">D19 x W23 x H50</p>
-              </div>
-              <div class="spec-item">
-                <p class="spec-key">Weight</p>
-                <p class="spec-value">300</p>
-              </div>
-            </div>
-          </div>
-          <!-- bottom ----------------------------->
-          <div class="bottom-bar">
-            <div class="quantity-selector">
-              <button class="decrease-btn">–</button>
-              <input
-                type="number"
-                id="quantity-input"
-                class="quantity-input"
-                value="1"
-                min="1"
-              />
-              <button class="increase-btn">+</button>
-            </div>
-            <button class="add-to-cart-modal-btn">ADD TO CART</button>
-          </div>
+        <div id="modal-product-main">
+          <!-- Product details will be dynamically inserted here -->
         </div>
       </div>
     </section>
@@ -169,4 +100,5 @@
     </footer>
   </body>
 </html>
-<script src="./main.js"></script>
+<script src="main.js" type="module"></script>
+<!-- <script src="./productModal.js"></script> -->

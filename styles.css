@@ -169,8 +169,8 @@ section.products-list {
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  /* display: none; */
+  /* display: flex; */
+  display: none;
 }
 .product-modal .product-img {
   width: 50%;

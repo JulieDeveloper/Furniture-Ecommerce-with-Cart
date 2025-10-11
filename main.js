@@ -1,3 +1,5 @@
+import { createModal, closeModal } from './productModal.js';
+
 const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/11.6.1' } };
 let rawProducts = [];
 
@@ -7,6 +9,7 @@ const productsList_HTML = document.getElementById('product-grid');
 const sortBy_HTML = document.getElementById('sort-by-select');
 const sortOrder_HTML = document.getElementById('sort-order');
 const resultCount_HTML = document.getElementById('result-count');
+const modalCloseBtn = document.getElementById('close-modal-btn');
 
 // API endpoint
 let sortBy_Endpoint = 'sort=newest';
@@ -77,6 +80,26 @@ sortBy_HTML.addEventListener('change', (e) => {
     fetchProducts(fetchURL);
 
 })
+
+// Handle Product Click for Modal
+productsList_HTML.addEventListener('click', (e) => {
+    const productCard = e.target.closest('.product-card');
+    if (!productCard) return; // Clicked outside a product card
+
+    const productId = productCard.getAttribute('data-id');
+    const selectedProduct = rawProducts.find(product => product.id == productId);
+    if (selectedProduct) {
+        console.log('Selected Product:', selectedProduct);
+        createModal(selectedProduct);
+    }
+});
+
+
+// Handle Close Modal
+modalCloseBtn.addEventListener('click', () => {
+    console.log('Close modal button clicked');
+    closeModal()
+});
 
 // Initial Fetch
 fetchProducts(fetchURL);
