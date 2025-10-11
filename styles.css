@@ -428,10 +428,15 @@ details[open] > summary {
   border-bottom: 1px solid #000;
 }
 
+#category-dropdown,
+#wood-dropdown,
+#finish-dropdown {
+  font-weight: 500;
+}
 #category-dropdown[open] > summary,
 #wood-dropdown[open] > summary,
 #finish-dropdown[open] > summary {
-  font-weight: 700;
+  border-bottom: 2px solid #000;
 }
 details.filter-dropdown summary {
   padding-left: 45px;
@@ -440,11 +445,11 @@ details.filter-dropdown summary {
 .filter-btns {
   height: 60px;
   display: flex;
+  border-top: 2px solid #000;
 }
 
 .filter-btn {
   width: 50%;
-  border: 2px solid #000;
   font-size: 1.5rem;
   font-weight: 500;
   cursor: pointer;
