@@ -11,7 +11,7 @@ let sortedBy_global = 'new-arrival'; // Default sort option
 const productsList_HTML = document.getElementById('product-grid');
 const sortBy_HTML = document.getElementById('sort-by-select');
 const sortOrder_HTML = document.getElementById('sort-order');
-const resultCount_HTML = document.getElementById('result-count');
+// const resultCount_HTML = document.getElementById('result-count');
 const modalCloseBtn = document.getElementById('close-modal-btn');
 
 // API endpoint
@@ -38,7 +38,7 @@ const renderProducts = (products) => {
         </div>
         `})
     productsList_HTML.innerHTML = renderHTML;
-    resultCount_HTML.textContent = products.length;
+    // resultCount_HTML.textContent = products.length;
 }
 
 // Handle Sort By Change
