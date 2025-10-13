@@ -118,7 +118,11 @@ pageNames.forEach(pageName => {
             // Fetch and render products based on page
             fetchProducts(pageName_global).then(products => {
                 rawProducts = products; // Update rawProducts for modal 
-                renderProducts(rawProducts);
+                sortProducts({ pageName: pageName_global, products: rawProducts, sortedBy: sortedBy_global }).then(sortedProducts => {
+                    rawProducts = sortedProducts; // Update rawProducts for modal functionality
+                    renderProducts(sortedProducts);
+                });
+
             });
         });
     }
