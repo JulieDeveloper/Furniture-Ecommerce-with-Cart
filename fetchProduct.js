@@ -23,6 +23,7 @@ async function fetchProducts(pageName) {
 
         // All products Page
         if (pageName === 'all') {
+            console.log('Fetching all products');
             const res = await fetch(`${BASE_URL}?limit=100`);
             const data = await res.json();
             productsList = data.data;
@@ -31,6 +32,7 @@ async function fetchProducts(pageName) {
 
         // Category-specific Pages
         const categories = categoryMap[pageName];
+        console.log('pageName:', pageName);
         if (!categories) {
             console.error(`Invalid page name: ${pageName}`);
             return;

@@ -1,9 +1,11 @@
 import { createModal, closeModal } from './productModal.js';
 import { fetchProducts } from './fetchProduct.js';
+import { sortProducts } from './sort.js';
 
 const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/11.6.1' } };
 let rawProducts = [];
-
+let pageName_global = 'all'; // Default page
+let sortedBy_global = 'new-arrival'; // Default sort option
 
 // HTML elements: 
 const productsList_HTML = document.getElementById('product-grid');
@@ -15,13 +17,12 @@ const modalCloseBtn = document.getElementById('close-modal-btn');
 // API endpoint
 let sortBy_Endpoint = 'sort=newest';
 const BaseURL = 'https://furniture-api.fly.dev/v1/products?limit=100';
-let fetchURL = BaseURL + '&' + sortBy_Endpoint;
 
 
 
 // Render Products
 const renderProducts = (products) => {
-    console.log('Rendering products:', products);
+    // console.log('Rendering products:', products);
     let renderHTML = '';
     products.map(product => {
         renderHTML += `
@@ -41,31 +42,19 @@ const renderProducts = (products) => {
 }
 
 // Handle Sort By Change
-sortBy_HTML.addEventListener('change', (e) => {
-    sortedBy = e.target.value;
-    console.log('Sort by:', sortedBy);
+sortBy_HTML.addEventListener('change', async (e) => {
+    sortedBy_global = e.target.value;
+    console.log('Sort by click:', sortedBy_global);
 
-    switch (sortedBy) {
-        case 'new-arrival':
-            fetchURL = BaseURL + '&' + 'sort=newest';
-            break;
-        case 'price-asc':
-            fetchURL = BaseURL + '&' + 'sort=price_asc';
-            break;
-        case 'price-desc':
-            fetchURL = BaseURL + '&' + 'sort=price_desc';
-            break;
-        case 'name-asc':
-            fetchURL = BaseURL + '&' + 'sort=name_asc';
-            break;
-        case 'name-desc':
-            fetchURL = BaseURL + '&' + 'sort=name_desc';
-            break;
-
+    try {
+        const sortedList = await sortProducts({ pageName_global, products: rawProducts, sortedBy: sortedBy_global });
+        rawProducts = sortedList;
+        renderProducts(sortedList);
+    } catch (err) {
+        console.error(err);
     }
-    fetchProducts(fetchURL);
+});
 
-})
 
 // Handle Product Click for Modal
 productsList_HTML.addEventListener('click', (e) => {
@@ -108,10 +97,13 @@ filterMenuCheckbox_HTML.addEventListener('change', (e) => {
 const pageNames = ['bestSellers', 'all', 'living', 'bedroom', 'kitchenDining', 'office', 'bathroom', 'outdoor']; // Corresponding to menu's html's IDs
 pageNames.forEach(pageName => {
     const menuItem = document.getElementById(`menu-${pageName}`);
+    // console.log('pageName when click:', pageName);
     const pageNameId = pageName
     if (menuItem) {
         menuItem.addEventListener('click', () => {
             console.log(`Menu item clicked: ${pageName}`);
+            pageName_global = pageNameId; // Update global pageName for sorting functionality
+            rawProducts = []; // Clear rawProducts for new page fetch
             // Update page title
             if (pageNameId === 'bestSellers') {
                 document.getElementById('page-title').textContent = 'Best Sellers';
@@ -124,9 +116,9 @@ pageNames.forEach(pageName => {
             }
 
             // Fetch and render products based on page
-            fetchProducts(pageName).then(products => {
+            fetchProducts(pageName_global).then(products => {
                 rawProducts = products; // Update rawProducts for modal 
-                renderProducts(products);
+                renderProducts(rawProducts);
             });
         });
     }
@@ -135,7 +127,7 @@ pageNames.forEach(pageName => {
 
 
 // Initial Fetch
-fetchProducts('All').then(products => {
+fetchProducts('all').then(products => {
     rawProducts = products; // Update rawProducts for modal functionality
     renderProducts(products);
 });
