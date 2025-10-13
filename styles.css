@@ -69,8 +69,9 @@ li {
   align-items: center;
 }
 
-li a {
+li div {
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 div.sub-nav {
@@ -84,7 +85,9 @@ div.sub-nav {
   align-items: center;
   padding: 10px;
   border-bottom: 2px solid #000;
-  visibility: hidden;
+  background-color: #fff;
+
+  /* visibility: hidden; */
 }
 
 .sub-nav ul {
@@ -145,6 +148,7 @@ section.products-list {
   display: flex;
   flex-direction: column;
   border: 1px solid #000;
+  cursor: pointer;
 }
 
 .product-card img {
@@ -231,7 +235,6 @@ section.products-list {
   display: flex;
   align-items: center;
   gap: 10px;
-  /* margin-top: 200px; */
   padding: 0 20px;
 }
 
@@ -332,7 +335,7 @@ section.products-list {
   position: fixed;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: -405px;
   width: 400px;
   height: 100vh;
   background: white;

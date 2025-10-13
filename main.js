@@ -1,4 +1,5 @@
 import { createModal, closeModal } from './productModal.js';
+import { fetchProducts } from './fetchProduct.js';
 
 const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/11.6.1' } };
 let rawProducts = [];
@@ -16,21 +17,6 @@ let sortBy_Endpoint = 'sort=newest';
 const BaseURL = 'https://furniture-api.fly.dev/v1/products?limit=100';
 let fetchURL = BaseURL + '&' + sortBy_Endpoint;
 
-
-// Fetch Product List
-const fetchProducts = (URL) => {
-    fetch(URL, options)
-        .then(res => res.json())
-        // handle success: 
-        .then(res => {
-            rawProducts = res.data
-            renderProducts(rawProducts);
-        })
-
-        // handle error:
-        .catch(err => console.error(err));
-
-}
 
 
 // Render Products
@@ -118,7 +104,38 @@ filterMenuCheckbox_HTML.addEventListener('change', (e) => {
     }
 });
 
+// Handle Page Change
+const pageNames = ['bestSellers', 'all', 'living', 'bedroom', 'kitchenDining', 'office', 'bathroom', 'outdoor']; // Corresponding to menu's html's IDs
+pageNames.forEach(pageName => {
+    const menuItem = document.getElementById(`menu-${pageName}`);
+    const pageNameId = pageName
+    if (menuItem) {
+        menuItem.addEventListener('click', () => {
+            console.log(`Menu item clicked: ${pageName}`);
+            // Update page title
+            if (pageNameId === 'bestSellers') {
+                document.getElementById('page-title').textContent = 'Best Sellers';
+            } else if (pageNameId === 'all') {
+                document.getElementById('page-title').textContent = 'All Products';
+            } else if (pageNameId === 'kitchenDining') {
+                document.getElementById('page-title').textContent = 'Kitchen & Dining';
+            } else {
+                document.getElementById('page-title').textContent = pageNameId;
+            }
+
+            // Fetch and render products based on page
+            fetchProducts(pageName).then(products => {
+                rawProducts = products; // Update rawProducts for modal 
+                renderProducts(products);
+            });
+        });
+    }
+})
+
 
 
 // Initial Fetch
-fetchProducts(fetchURL);
+fetchProducts('All').then(products => {
+    rawProducts = products; // Update rawProducts for modal functionality
+    renderProducts(products);
+});
