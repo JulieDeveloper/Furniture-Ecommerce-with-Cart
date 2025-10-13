@@ -136,6 +136,10 @@ select.sort-by {
   font-weight: 500;
 }
 
+label.filter-label {
+  display: none;
+}
+
 /* Products List */
 section.products-list {
   max-width: 100vw;
@@ -335,13 +339,14 @@ section.products-list {
   position: fixed;
   top: 0;
   bottom: 0;
-  right: -405px;
+  right: -410px;
   width: 400px;
   height: 100vh;
   background: white;
   border: 2px solid #000;
   z-index: 10;
   overflow: hidden;
+  display: none;
 }
 .filter-menu .filter-header {
   height: 60px;
