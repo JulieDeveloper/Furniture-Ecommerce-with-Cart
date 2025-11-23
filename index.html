@@ -1,95 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Furniture Ecommerce</title>
-    <link rel="stylesheet" href="./styles.css" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Staatliches&display=swap");
-    </style>
-  </head>
-  <body>
-    <nav>
-      <div class="logo"><a href="#">CONCEPT</a></div>
-      <ul>
-        <li><div id="menu-bestSellers">Best Sellers</div></li>
-        <li><div id="menu-all">All</div></li>
-        <li id="categories-li">
-          <div>Categories</div>
-          <div class="sub-nav">
-            <ul>
-              <li><div id="menu-living">Living</div></li>
-              <li><div id="menu-bedroom">Bedroom</div></li>
-              <li><div id="menu-kitchenDining">Kitchen / Dining</div></li>
-              <li><div id="menu-office">Office</div></li>
-              <li><div id="menu-bathroom">Bath</div></li>
-              <li><div id="menu-outdoor">Outdoor</div></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-      <ul>
-        <li id="nav-cart"><a href="#">Cart(0)</a></li>
-      </ul>
-    </nav>
 
-    <!-- Main Content -->
-    <main>
-      <h1 class="page-title" id="page-title">All Products</h1>
-      <!-- Sort By & Filter -->
-      <section class="products-bar">
-        <!-- <p class="result">List(<span id="result-count">0</span>)</p> -->
-        <div class="sort-and-filter">
-          <!-- filter btn-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Furniture Ecommerce</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Staatliches&display=swap");
+  </style>
+</head>
 
-          <input
-            class="filter-toggle"
-            type="checkbox"
-            name="filter-by"
-            id="filter-by-checkbox"
-          />
-          <label class="filter-label" for="filter-by-checkbox">Filter By</label>
-          <!-- sort btn -->
-          <select class="sort-by" name="sort-by" id="sort-by-select">
-            <option value="new_arrival" default>Sort By : New Arrival</option>
-            <option value="price_asc">Sort By : Price(Low to High)</option>
-            <option value="price_desc">Sort By : Price(High to Low)</option>
-            <option value="name_asc">Sort By : Name(A to Z)</option>
-            <option value="name_desc">Sort By : Name(Z to A)</option>
-          </select>
+<body>
+  <nav>
+    <div class="logo"><a href="#">CONCEPT</a></div>
+    <ul>
+      <li>
+        <div id="menu-bestSellers">Best Sellers</div>
+      </li>
+      <li>
+        <div id="menu-all">All</div>
+      </li>
+      <li id="categories-li">
+        <div>Categories</div>
+        <div class="sub-nav">
+          <ul>
+            <li>
+              <div id="menu-living">Living</div>
+            </li>
+            <li>
+              <div id="menu-bedroom">Bedroom</div>
+            </li>
+            <li>
+              <div id="menu-kitchenDining">Kitchen / Dining</div>
+            </li>
+            <li>
+              <div id="menu-office">Office</div>
+            </li>
+            <li>
+              <div id="menu-bathroom">Bath</div>
+            </li>
+            <li>
+              <div id="menu-outdoor">Outdoor</div>
+            </li>
+          </ul>
         </div>
-      </section>
-      <!-- Products List -->
-      <section class="products-list" id="product-grid">
-        <!-- Products will be dynamically inserted here -->
-        <div class="product-card">
-          <!-- <img src="https://via.placeholder.com/150" alt="Product Image" />
+      </li>
+    </ul>
+    <ul>
+      <input type="checkbox" class="cart-toggle" name="cart" id="cart-checkbox" />
+      <li id="nav-cart_HTML"><label for="cart-checkbox">Cart<span id="nav-cart-num">(0)</span></label></a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <h1 class="page-title" id="page-title">All Products</h1>
+    <!-- Sort By & Filter -->
+    <section class="products-bar">
+      <!-- <p class="result">List(<span id="result-count">0</span>)</p> -->
+      <div class="sort-and-filter">
+        <!-- filter btn-->
+
+        <input class="filter-toggle" type="checkbox" name="filter-by" id="filter-by-checkbox" />
+        <label class="filter-label" for="filter-by-checkbox">Filter By</label>
+        <!-- sort btn -->
+        <select class="sort-by" name="sort-by" id="sort-by-select">
+          <option value="new_arrival" default>Sort By : New Arrival</option>
+          <option value="price_asc">Sort By : Price(Low to High)</option>
+          <option value="price_desc">Sort By : Price(High to Low)</option>
+          <option value="name_asc">Sort By : Name(A to Z)</option>
+          <option value="name_desc">Sort By : Name(Z to A)</option>
+        </select>
+      </div>
+    </section>
+    <!-- Products List -->
+    <section class="products-list" id="product-grid">
+      <!-- Products will be dynamically inserted here -->
+      <div class="product-card">
+        <!-- <img src="https://via.placeholder.com/150" alt="Product Image" />
           <div class="product-details">
             <div>
               <p class="product-name">Product Name</p>
               <p class="product-price">$99.99</p>
             </div>
             <div class="add-to-cart-btn">+</div> -->
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Filter Menu -->
-    <aside class="filter-menu" id="filter-menu" aria-label="Product filters">
-      <div class="filter-header">
-        <h2>FILTER BY</h2>
       </div>
+      </div>
+    </section>
+  </main>
 
-      <div class="filter-options">
-        <!-- Parent Category dropdown that nests each sub-category -->
-        <details class="filter-group-dropdown" id="category-dropdown" open>
-          <summary>
-            <span class="summary-label category-main">Category</span>
-          </summary>
+  <!-- Filter Menu -->
+  <aside class="filter-menu" id="filter-menu" aria-label="Product filters">
+    <div class="filter-header">
+      <h2>FILTER BY</h2>
+    </div>
 
-          <div class="filter-group" role="group" aria-label="Category subgroups">
+    <div class="filter-options">
+      <!-- Parent Category dropdown that nests each sub-category -->
+      <details class="filter-group-dropdown" id="category-dropdown" open>
+        <summary>
+          <span class="summary-label category-main">Category</span>
+        </summary>
+
+        <div class="filter-group" role="group" aria-label="Category subgroups">
 
           <!-- Living Room -->
           <details class="filter-dropdown" open>
@@ -241,133 +255,289 @@
             </ul>
           </details>
 
-          </div>
-        </details>
-        
-        <!-- WOOD TYPE -->
-        <!-- walnut','maple','oak','pine','eucalyptus','bamboo','teak','cedar -->
-        <details class="filter-group-dropdown" id="wood-dropdown" open>
-          <summary>
-            <span class="summary-label wood-main">Wood Type</span>
-          </summary>
-          <ul class="nested-options">
-              <li>
-                <label for="wood-walnut">
-                  <input id="wood-walnut" type="checkbox" name="wood[]" value="walnut" />
-                  Walnut
-                </label>
-              </li>
-              <li>
-                <label for="wood-maple">
-                  <input id="wood-maple" type="checkbox" name="wood[]" value="maple" />
-                  Maple
-                </label>
-              </li>
-              <li>
-                <label for="wood-oak">
-                  <input id="wood-oak" type="checkbox" name="wood[]" value="oak" />
-                  Oak
-                </label>
-              </li>
-              <li>
-                <label for="wood-pine">
-                  <input id="wood-pine" type="checkbox" name="wood[]" value="pine" />
-                  Pine
-                </label>
-              </li>
-              <li>
-                <label for="wood-eucalyptus">
-                  <input id="wood-eucalyptus" type="checkbox" name="wood[]" value="eucalyptus" />
-                  Eucalyptus
-                </label>
-              </li>
-               <li>
-                <label for="wood-bamboo">
-                  <input id="wood-bamboo" type="checkbox" name="wood[]" value="bamboo" />
-                  Bamboo
-                </label>
-              </li>
-                <li>
-                  <label for="wood-teak">
-                    <input id="wood-teak" type="checkbox" name="wood[]" value="teak" />
-                    Teak
-                  </label>
-                </li>
-                <li>
-                  <label for="wood-cedar">
-                    <input id="wood-cedar" type="checkbox" name="wood[]" value="cedar" />
-                    Cedar
-                  </label>  
-                </li>
-            </ul>
-        </details>
+        </div>
+      </details>
 
-         <!-- Finish TYPE -->
-        <!-- 'dark', 'medium', 'light', 'natural' -->
-        <details class="filter-group-dropdown" id="finish-dropdown" open>
-          <summary>
-            <span class="summary-label finish-main">Finish Type</span>
-          </summary>
-          <ul class="nested-options">
-              <li>
-                <label for="finish-dark">
-                  <input id="finish-dark" type="checkbox" name="finish[]" value="dark" />
-                  Dark
-                </label>
-              </li>
-              <li>
-                <label for="finish-medium">
-                  <input id="finish-medium" type="checkbox" name="finish[]" value="medium" />
-                  Medium
-                </label>
-              </li>
-              <li>
-                <label for="finish-light">
-                  <input id="finish-light" type="checkbox" name="finish[]" value="light" />
-                  Light
-                </label>
-              </li>
-              <li>
-                <label for="finish-natural">
-                  <input id="finish-natural" type="checkbox" name="finish[]" value="natural" />
-                  Natural
-                </label>
-              </li>
-            </ul>
-        </details>
-      </div>
-      <div class="filter-btns">
-        <button id="apply-filters-btn" class="filter-btn apply">Apply</button>
-        <button id="clear-filters-btn" class="filter-btn clear">Clear</button>
-      </div>
-    </aside>
+      <!-- WOOD TYPE -->
+      <!-- walnut','maple','oak','pine','eucalyptus','bamboo','teak','cedar -->
+      <details class="filter-group-dropdown" id="wood-dropdown" open>
+        <summary>
+          <span class="summary-label wood-main">Wood Type</span>
+        </summary>
+        <ul class="nested-options">
+          <li>
+            <label for="wood-walnut">
+              <input id="wood-walnut" type="checkbox" name="wood[]" value="walnut" />
+              Walnut
+            </label>
+          </li>
+          <li>
+            <label for="wood-maple">
+              <input id="wood-maple" type="checkbox" name="wood[]" value="maple" />
+              Maple
+            </label>
+          </li>
+          <li>
+            <label for="wood-oak">
+              <input id="wood-oak" type="checkbox" name="wood[]" value="oak" />
+              Oak
+            </label>
+          </li>
+          <li>
+            <label for="wood-pine">
+              <input id="wood-pine" type="checkbox" name="wood[]" value="pine" />
+              Pine
+            </label>
+          </li>
+          <li>
+            <label for="wood-eucalyptus">
+              <input id="wood-eucalyptus" type="checkbox" name="wood[]" value="eucalyptus" />
+              Eucalyptus
+            </label>
+          </li>
+          <li>
+            <label for="wood-bamboo">
+              <input id="wood-bamboo" type="checkbox" name="wood[]" value="bamboo" />
+              Bamboo
+            </label>
+          </li>
+          <li>
+            <label for="wood-teak">
+              <input id="wood-teak" type="checkbox" name="wood[]" value="teak" />
+              Teak
+            </label>
+          </li>
+          <li>
+            <label for="wood-cedar">
+              <input id="wood-cedar" type="checkbox" name="wood[]" value="cedar" />
+              Cedar
+            </label>
+          </li>
+        </ul>
+      </details>
 
-    <!-- Modal -->
-    <section id="product-modal" class="product-modal">
+      <!-- Finish TYPE -->
+      <!-- 'dark', 'medium', 'light', 'natural' -->
+      <details class="filter-group-dropdown" id="finish-dropdown" open>
+        <summary>
+          <span class="summary-label finish-main">Finish Type</span>
+        </summary>
+        <ul class="nested-options">
+          <li>
+            <label for="finish-dark">
+              <input id="finish-dark" type="checkbox" name="finish[]" value="dark" />
+              Dark
+            </label>
+          </li>
+          <li>
+            <label for="finish-medium">
+              <input id="finish-medium" type="checkbox" name="finish[]" value="medium" />
+              Medium
+            </label>
+          </li>
+          <li>
+            <label for="finish-light">
+              <input id="finish-light" type="checkbox" name="finish[]" value="light" />
+              Light
+            </label>
+          </li>
+          <li>
+            <label for="finish-natural">
+              <input id="finish-natural" type="checkbox" name="finish[]" value="natural" />
+              Natural
+            </label>
+          </li>
+        </ul>
+      </details>
+    </div>
+    <div class="filter-btns">
+      <button id="apply-filters-btn" class="filter-btn apply">Apply</button>
+      <button id="clear-filters-btn" class="filter-btn clear">Clear</button>
+    </div>
+  </aside>
+
+  <!-- Modal -->
+  <section id="product-modal" class="product-modal">
     <!-- img -->
-      <div class="product-img" id="modal-product-img" ></div>
-      <div class="container">
-        <!-- top bar ----------------------------->
-        <div class="top-bar">
-          <div class="status-box">
-            <span class="circle"></span>
-            <p class="status-text">In Stock</p>
-          </div>
-          <div class="close-btn" id="close-modal-btn">X</div>
+    <div class="product-img" id="modal-product-img"></div>
+    <div class="container">
+      <!-- top bar ----------------------------->
+      <div class="top-bar">
+        <div class="status-box">
+          <span class="circle"></span>
+          <p class="status-text">In Stock</p>
         </div>
-        <!-- main ----------------------------->
-        <div id="modal-product-main">
-          <!-- Product details will be dynamically inserted here -->
+        <div class="close-btn" id="close-modal-btn">X</div>
+      </div>
+      <!-- main ----------------------------->
+      <div id="modal-product-main">
+        <!-- Product details will be dynamically inserted here -->
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Cart -->
+  <section id="cart-section">
+    <!-- cart top bar -->
+    <div class="cart-header">
+      <h1>Cart</h1>
+      <div id="close-cart-btn">X</div>
+    </div>
+    <!-- product list -->
+    <div id="cart-products-list" class="cart-products-list">
+      <!-- Cart items will be dynamically inserted here -->
+      <div data-id="" class="cart-product-card">
+        <img class="cart-product-img"
+          src="https://wvxxlssoccbctxspmtyy.supabase.co/storage/v1/object/public/products/public/24fada32-83ae-4598-9815-06fc6b891277.jpeg"></img>
+        <!-- product info -->
+        <div class="cart-product-info">
+          <p class="cart-product-name">Elegant Oak Table Lamp</p>
+          <p class="cart-product-des">Oak | D12 x W12 x H25</p>
+          <div class="cart-product-delivery">
+            <div class="available-status-circle green"></div>
+            <p class="content">Available For Delivery</p>
+          </div>
+          <div class="cart-product-pickup">
+            <div class="available-status-circle red"></div>
+            <p class="content">Available For Store Pickup</p>
+          </div>
+          <p class="cart-product-price">$75</p>
+
+          <!-- control flex -->
+          <div class="flex-control">
+            <!-- quantity controls -->
+            <div class="cart-product-quantity">
+              <div class="decrease-qty-btn">-</div>
+              <span class="quantity-value">1</span>
+              <div class="increase-qty-btn">+</div>
+            </div>
+            <!-- Remove & Save for Later BTNs -->
+            <div class="controls-btns">
+              <div class="control-btn remove-btn">Remove</div>
+              <div class="control-btn save-for-later-btn">Save for Later</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- cart footer -->
+    <div class="cart-footer">
+      <!-- Your Order -->
+      <div class="your-order">
+        <h2>Your Order</h2>
+      </div>
+      <!-- Promo -->
+      <div class="promo-code-section">
+
+
+        <!-- checkbox -->
+        <input class="collapse-input" type="checkbox" name="promo-checkbox" id="promo-checkbox_HTML" checked />
+
+        <label for="promo-checkbox_HTML" class="checkbox-label">
+          <p><b>Have a promo code?</b></p>
+          <img src="./assets/collapse-icon.svg" alt="collapse icon">
+        </label>
+
+        <div class="collapse-content">
+          <label for="promo-code-input">Promo Code(optional)</label>
+          <div class="promo-wrapper">
+            <input id="promo-code-input" type="text" placeholder="Enter code" />
+            <button id="apply-promo-btn">Apply</button>
+            <p id="promo-apply-response" class="apply-promo-response">10%OFF</p>
+          </div>
+
         </div>
       </div>
-    </section>
-    <footer>
-      <p>
-        &copy; 2025 Furniture Ecommerce Design and Development By Julie Chou.
-        All rights reserved.
-      </p>
-    </footer>
-  </body>
-</html>
-<script src="main.js" type="module"></script>
 
+      <!-- Deliver/Pickup -->
+      <div class="delivery-pickup-section">
+        <input class="collapse-input" type="checkbox" name="delivery-checkbox" id="delivery-checkbox_HTML" checked />
+
+
+        <label for="delivery-checkbox_HTML" class="checkbox-label">
+          <p><b>Delivery / Pickup</b></p>
+          <img src="./assets/collapse-icon.svg" alt="collapse icon">
+        </label>
+
+        <div class="collapse-content">
+          <fieldset>
+            <div class="delivery-option">
+              <input type="radio" id="delivery" name="delivery-pickup" value="delivery" checked />
+              <label for="delivery">
+                <p class="main"><b>Delivery</b> $120</p>
+                <p class="description">Delivered in 2–4 Weeks</p>
+              </label>
+            </div>
+            <div class="pickup-option">
+              <input type="radio" id="pickup" name="delivery-pickup" value="pickup" />
+              <label for="pickup">
+                <p class="main"><b>Store PickUp</b> Free</p>
+                <p class="description">Anytime During Opening Hour</p>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- summary list -->
+      <div class="cart-summary-section">
+        <!-- subtotal -->
+        <div class="subtotal-row cart-summary-row">
+          <p>Item(s) Subtotal</p>
+          <p id="itemSubtotal_HTML" class="cart-align-right">$600.00</p>
+        </div>
+        <!-- promo -->
+        <div class="promo-row cart-summary-row">
+          <p id="promo-label_HTML">Promo Code: 10% OFF</p>
+          <p id="itemSubtotal_HTML" class="cart-align-right">– $60.00</p>
+        </div>
+        <!-- shipping/pickup -->
+        <div class="shipping-row cart-summary-row">
+          <p id="shipping-label_HTML">Home Delivery</p>
+          <p id="shipping-value_HTML" class="cart-align-right">+ $25.80</p>
+        </div>
+        <div class="divide-line"></div>
+
+        <!-- total before tax -->
+        <div class="total-before-tax-row cart-summary-row">
+          <p>Total Before Tax</p>
+          <p id="total-before-tax-value_HTML" class="cart-align-right">$565.80</p>
+        </div>
+        <!-- tax -->
+        <div class="tax-row cart-summary-row">
+          <p>Sales Tax<span class="text-grey">(13% GST/HST)</span></p>
+          <p id="tax-value_HTML" class="cart-align-right">$60.00</p>
+        </div>
+        <!-- total -->
+        <div class="total-row cart-summary-row">
+          <p><b>TOTAL</b></p>
+          <p id="total-value_HTML"><b>$745.80</b></p>
+        </div>
+
+      </div>
+
+      <!-- subtotal -->
+      <div class="subtotal-price">
+        <h2 class="cart-align-left">Subtotal<span>(CAD)</span></h2>
+        <h2 id="subtotal-value_HTML" class="cart-align-right">$625.80</h2>
+      </div>
+      <div class="cart-checkout-btn" id="cart-checkout-btn">CHECKOUT <img src="./assets/arrow-right.svg"
+          alt="arrow right icon"></div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2025 Furniture Ecommerce Design and Development By Julie Chou.
+      All rights reserved.
+    </p>
+  </footer>
+  <script src="main.js" type="module"></script>
+</body>
+
+</html>
