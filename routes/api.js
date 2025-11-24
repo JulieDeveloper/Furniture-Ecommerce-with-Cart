@@ -18,6 +18,7 @@ router.post("/cartProduct", async (req, res) => {
 			data: req.body
 		});
 		res.send(cartList);
+		console.log("Api.js ––– Created cart product:", cartList);
 	} catch (err) {
 		res.status(500).send(err);
 	}
@@ -29,6 +30,7 @@ router.get("/cartProducts", async (req, res) => {
 		// fetch first 10 records from the database with no filter
 		const result = await prisma[model].findMany();
 		res.send(result);
+		console.log("Api.js ––– Fetched cart products:", result);
 	} catch (err) {
 		console.log(err);
 		res.status(500).send(err);
@@ -38,9 +40,11 @@ router.get("/cartProducts", async (req, res) => {
 // Update: edit particular product in the cart
 router.put("/cartProduct/:id", async (req, res) => {
 	try {
-		// fetch first 10 records from the database with no filter
+		// console.log("Api.js ––– Update request - ID:", req.params.id);
+		// console.log("Api.js ––– Update request - Body:", req.body);
+
 		const result = await prisma[model].update({
-			where: { id: parseInt(req.params.id) },
+			where: { id: req.params.id },
 			data: req.body
 		});
 		res.send(result);
@@ -50,12 +54,14 @@ router.put("/cartProduct/:id", async (req, res) => {
 	}
 });
 
-// DELETE: remove particular product from cart
+// DELETE: remove a product from the cart
 router.delete("/cartProduct/:id", async (req, res) => {
 	try {
 		const result = await prisma[model].delete({
-			where: { id: parseInt(req.params.id) }
+			where: { id: req.params.id }
 		});
+		console.log("Api.js ––– Delete - ID:", req.params.id);
+
 		res.send(result);
 	} catch (err) {
 		console.log(err);

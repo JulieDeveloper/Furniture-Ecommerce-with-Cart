@@ -36,6 +36,7 @@ const readData = async () => {
 				document.querySelector("#notices").style.display = "block";
 				return [];
 			}
+			console.log("Fetch cart products response:", response);
 			return response.json();
 		})
 		.catch((err) => {
@@ -46,40 +47,29 @@ const readData = async () => {
 };
 
 // UPDATE: Update an existing product in the shopping cart
-// productData should contain the fields to update from the cartProduct schema
-const updateData = async (productId, productData) => {
-	return fetch("/cartProduct/" + productId, {
-		method: "PUT",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			...(productData.deliveryAvailability !== undefined && {
-				deliveryAvailability: productData.deliveryAvailability
-			}),
-			editedDate: new Date().toISOString(),
-			...(productData.img && { img: productData.img }),
-			...(productData.link && { link: productData.link }),
-			...(productData.materialAndSize && {
-				materialAndSize: productData.materialAndSize
-			}),
-			...(productData.name && { name: productData.name }),
-			...(productData.pickupAvailability !== undefined && {
-				pickupAvailability: productData.pickupAvailability
-			}),
-			...(productData.price !== undefined && { price: productData.price }),
-			...(productData.productId && { productId: productData.productId }),
-			...(productData.qty !== undefined && { qty: productData.qty })
-		})
-	})
-		.then((response) => {
-			if (!response.ok) throw new Error("Failed to update cart product");
-			return response.json();
-		})
-		.catch((err) => console.log(err));
+const updateData = async (productId, newQty) => {
+	try {
+		const response = await fetch(`/cartProduct/${productId}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				qty: newQty,
+				editedDate: new Date()
+			})
+		});
+
+		if (!response.ok) {
+			throw new Error("Failed to update cart product");
+		}
+		return await response.json();
+	} catch (err) {
+		console.error(err);
+	}
 };
 
 // DELETE: Remove a product from the shopping cart
 const deleteData = async (productId) => {
-	return fetch("/cartProduct/" + productId, {
+	return fetch(`/cartProduct/${productId}`, {
 		method: "DELETE",
 		headers: { "Content-Type": "application/json" }
 	})
