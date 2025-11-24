@@ -10,14 +10,51 @@ const prisma = new PrismaClient(); //import and initialize the Prisma client
 
 const model = "cartProduct"; // match with Prisma schema model name
 
-// ----- basic findMany() -------
-// This endpoint uses the Prisma schema defined in /prisma/schema.prisma
-// This gives us a cleaner data structure to work with.
-router.get("/cartProduct", async (req, res) => {
+// CREATE: add a product into cart
+router.post("/cartProduct", async (req, res) => {
+	try {
+		console.log(req.body);
+		const cartList = await prisma[model].create({
+			data: req.body
+		});
+		res.send(cartList);
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
+
+// READ: Get product list in cart
+router.get("/cartProducts", async (req, res) => {
 	try {
 		// fetch first 10 records from the database with no filter
-		const result = await prisma[model].findMany({
-			take: 10
+		const result = await prisma[model].findMany();
+		res.send(result);
+	} catch (err) {
+		console.log(err);
+		res.status(500).send(err);
+	}
+});
+
+// Update: edit particular product in the cart
+router.put("/cartProduct/:id", async (req, res) => {
+	try {
+		// fetch first 10 records from the database with no filter
+		const result = await prisma[model].update({
+			where: { id: parseInt(req.params.id) },
+			data: req.body
+		});
+		res.send(result);
+	} catch (err) {
+		console.log(err);
+		res.status(500).send(err);
+	}
+});
+
+// DELETE: remove particular product from cart
+router.delete("/cartProduct/:id", async (req, res) => {
+	try {
+		const result = await prisma[model].delete({
+			where: { id: parseInt(req.params.id) }
 		});
 		res.send(result);
 	} catch (err) {
