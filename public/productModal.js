@@ -114,10 +114,27 @@ const createModal = (productData) => {
       `;
 	productModalMain_HTML.innerHTML = resultHTML;
 
-	// Add event listener for "ADD TO CART" button
+	// Get DOM elements
 	const addToCartBtn = document.querySelector(".add-to-cart-modal-btn");
 	const quantityInput = document.querySelector("#quantity-input");
+	const increaseBtn = document.querySelector(".increase-btn");
+	const decreaseBtn = document.querySelector(".decrease-btn");
 
+	// Add event listener for increase button
+	increaseBtn.addEventListener("click", () => {
+		const currentValue = parseInt(quantityInput.value) || 1;
+		quantityInput.value = currentValue + 1;
+	});
+
+	// Add event listener for decrease button
+	decreaseBtn.addEventListener("click", () => {
+		const currentValue = parseInt(quantityInput.value) || 1;
+		if (currentValue > 1) {
+			quantityInput.value = currentValue - 1;
+		}
+	});
+
+	// Add event listener for "ADD TO CART" button
 	addToCartBtn.addEventListener("click", async () => {
 		const quantity = parseInt(quantityInput.value) || 1;
 
