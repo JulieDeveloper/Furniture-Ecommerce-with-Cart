@@ -64,8 +64,10 @@ const renderCartProduct = (data) => {
 
 		cartProductHTML += `
     <div data-id="${product.id}" class="cart-product-card">
-        <img class="cart-product-img"
+      <div class="cart-product-img">
+        <img 
           src="${product.img}"></img>
+      </div>
         <!-- product info -->
         <div class="cart-product-info">
           <p class="cart-product-name">${product.name}</p>
