@@ -78,6 +78,10 @@ li div {
 	font-size: 1.2rem;
 	cursor: pointer;
 }
+.nav-cart-li,
+.nav-cart-li label {
+	cursor: pointer;
+}
 
 div.sub-nav {
 	position: fixed;
@@ -503,7 +507,7 @@ input.cart-toggle {
 	position: fixed;
 	top: 0px;
 	bottom: 0;
-	right: 0px;
+	right: -500px;
 	width: 500px;
 	height: 100vh;
 	background: white;
