@@ -2,7 +2,7 @@
 
 // CREATE: Add a product to the shopping cart
 // productData should contain all required fields from the cartProduct schema
-const createData = async (productData) => {
+const createProduct = async (productData) => {
 	return fetch("/cartProduct", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ const createData = async (productData) => {
 };
 
 // READ: Retrieve all products from the shopping cart
-const readData = async () => {
+const readProduct = async () => {
 	return fetch("/cartProducts", { method: "GET" })
 		.then(async (response) => {
 			if (!response.ok) {
@@ -47,7 +47,7 @@ const readData = async () => {
 };
 
 // UPDATE: Update an existing product in the shopping cart
-const updateData = async (productId, newQty) => {
+const updateProduct = async (productId, newQty) => {
 	try {
 		const response = await fetch(`/cartProduct/${productId}`, {
 			method: "PUT",
@@ -68,7 +68,7 @@ const updateData = async (productId, newQty) => {
 };
 
 // DELETE: Remove a product from the shopping cart
-const deleteData = async (productId) => {
+const deleteProduct = async (productId) => {
 	return fetch(`/cartProduct/${productId}`, {
 		method: "DELETE",
 		headers: { "Content-Type": "application/json" }
@@ -80,4 +80,4 @@ const deleteData = async (productId) => {
 		.catch((err) => console.log(err));
 };
 
-export { createData, readData, updateData, deleteData };
+export { createProduct, readProduct, updateProduct, deleteProduct };

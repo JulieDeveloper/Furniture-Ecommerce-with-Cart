@@ -1,4 +1,4 @@
-import { readData, updateData, deleteData } from "./crud.js";
+import { readProduct, updateProduct, deleteProduct } from "./crud.js";
 
 const cartList_HTML = document.getElementById("cart-products-list");
 
@@ -12,9 +12,9 @@ const attachEventListeners = () => {
 			console.log(`click "–"`);
 
 			const newQty = Number(productQty) > 1 ? Number(productQty) - 1 : 1;
-			await updateData(productId, newQty);
+			await updateProduct(productId, newQty);
 
-			renderCartProduct(await readData());
+			renderCartProduct(await readProduct());
 		});
 	});
 
@@ -27,9 +27,9 @@ const attachEventListeners = () => {
 			console.log(`click "+"`);
 
 			const newQty = Number(productQty) + 1;
-			await updateData(productId, newQty);
+			await updateProduct(productId, newQty);
 
-			renderCartProduct(await readData());
+			renderCartProduct(await readProduct());
 		});
 	});
 
@@ -41,8 +41,8 @@ const attachEventListeners = () => {
 			console.log(`click "Remove"`);
 			console.log(`remove dataset id: ${productId}`);
 
-			await deleteData(productId);
-			renderCartProduct(await readData());
+			await deleteProduct(productId);
+			renderCartProduct(await readProduct());
 		});
 	});
 };
@@ -104,6 +104,7 @@ const renderCartProduct = (data) => {
 	attachEventListeners();
 };
 
-renderCartProduct(await readData());
+// Initial render
+renderCartProduct(await readProduct());
 
 export { renderCartProduct };
