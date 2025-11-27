@@ -545,7 +545,7 @@ input.cart-toggle {
 }
 .cart-product-card {
 	display: flex;
-	height: 200px;
+	min-height: 200px;
 	border-bottom: 1px solid #000;
 }
 
