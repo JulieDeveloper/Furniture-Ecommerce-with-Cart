@@ -1,4 +1,4 @@
-import { createData, readData } from "./crud.js";
+import { createProduct, readProduct } from "./crud.js";
 import { renderCartProduct } from "./cart.js";
 
 const createModal = (productData) => {
@@ -155,11 +155,11 @@ const createModal = (productData) => {
 		};
 
 		try {
-			const result = await createData(cartProductData);
+			const result = await createProduct(cartProductData);
 			if (result) {
 				console.log("Product added to cart:", result);
 				alert("Product added to cart successfully!");
-				renderCartProduct(await readData());
+				renderCartProduct(await readProduct());
 				closeModal();
 			}
 		} catch (error) {
