@@ -7,7 +7,7 @@ let subtotalAmount = 0;
 let taxAmount = 0;
 let totalBeforeTax = 0;
 let totalAfterTax = 0;
-let deliveryFee = 0;
+let deliveryFee = 120;
 let promoDiscount = 0;
 
 const displayAmounts = () => {
@@ -25,16 +25,18 @@ const displayAmounts = () => {
 	subtotal_HTML.innerText = `$${subtotalAmount.toFixed(2)}`;
 
 	// Delivery Fee
-	if (deliveryOption_HTML.innerText === "Home Delivery") {
-		deliveryFee = 120;
-	} else if (deliveryOption_HTML.innerText === "Store Pickup") {
-		deliveryFee = 0;
+	console.log("Delivery Fee:", deliveryFee);
+	if (deliveryFee === 120) {
+		deliveryFee_HTML.innerText = `+ $${deliveryFee.toFixed(2)}`;
+	} else if (deliveryFee === 0) {
+		deliveryFee_HTML.innerText = `Free`;
 	}
-	deliveryFee_HTML.innerText = `$${deliveryFee.toFixed(2)}`;
 
 	// Promo Discount
 	if (promoDiscount) {
 		discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+	} else {
+		discount_HTML.innerText = "";
 	}
 
 	// Before Tax Totals
@@ -126,18 +128,19 @@ const attachEventListeners = () => {
 
 	// Change Delivery Option
 	const deliveryRadios = document.querySelectorAll(
-		'input[name="delivery-pickup"]'
+		'input[name="delivery-option-inputs"]'
 	);
+	const deliveryOption_HTML = document.getElementById("shipping-label_HTML");
 
 	deliveryRadios.forEach((radio) => {
-		radio.addEventListener("change", () => {
+		radio.addEventListener("click", () => {
 			console.log("Selected:", radio.value);
 			if (radio.value === "delivery") {
 				deliveryOption_HTML.innerText = "Home Delivery";
-				deliveryFee = 120;
+				deliveryFee = Number(120);
 			} else if (radio.value === "pickup") {
 				deliveryOption_HTML.innerText = "Store Pickup";
-				deliveryFee = 0;
+				deliveryFee = Number(0);
 			}
 			calculateTotals();
 		});
