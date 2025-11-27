@@ -21,3 +21,13 @@ model cartProduct {
   productId            String
   qty                  Int
 }
+
+model promoCode {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  active      Boolean
+  createdAt   DateTime @db.Date
+  description String
+  discount    Float
+  endDate     DateTime @db.Date
+  promoCode   String
+}
