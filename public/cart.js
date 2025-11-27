@@ -8,6 +8,7 @@ let taxAmount = 0;
 let totalBeforeTax = 0;
 let totalAfterTax = 0;
 let deliveryFee = 120;
+let promoAfterDiscount = 0;
 let promoDiscount = 0;
 
 const displayAmounts = () => {
@@ -33,8 +34,8 @@ const displayAmounts = () => {
 	}
 
 	// Promo Discount
-	if (promoDiscount) {
-		discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+	if (promoAfterDiscount) {
+		discount_HTML.innerText = `– $${promoAfterDiscount.toFixed(2)}`;
 	} else {
 		discount_HTML.innerText = "";
 	}
@@ -52,10 +53,11 @@ const displayAmounts = () => {
 
 const calculateTotals = () => {
 	// Promo Discount
-	discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+	promoAfterDiscount = subtotalAmount - subtotalAmount * promoDiscount || 0;
+	discount_HTML.innerText = `– $${promoAfterDiscount.toFixed(2)}`;
 
 	// Before Tax Totals
-	totalBeforeTax = subtotalAmount + deliveryFee - promoDiscount;
+	totalBeforeTax = subtotalAmount + deliveryFee - promoAfterDiscount;
 
 	// Tax
 	taxAmount = totalBeforeTax * 0.13;
@@ -120,8 +122,9 @@ const attachEventListeners = () => {
 
 		// Apply discount if valid
 		if (verifyResult) {
-			promoDiscount = subtotalAmount - verifyResult.discount || 0;
-			console.log("Applied promo discount:", promoDiscount);
+			promoDiscount = verifyResult.discount;
+			promoAfterDiscount = subtotalAmount - promoDiscount || 0;
+			console.log("Applied promo discount:", promoAfterDiscount);
 			calculateTotals();
 		}
 	});
