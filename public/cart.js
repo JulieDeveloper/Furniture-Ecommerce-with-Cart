@@ -1,4 +1,5 @@
 import { readProduct, updateProduct, deleteProduct } from "./crud.js";
+import { verifyPromoCode } from "./promo.js";
 
 const cartList_HTML = document.getElementById("cart-products-list");
 
@@ -44,6 +45,20 @@ const attachEventListeners = () => {
 			await deleteProduct(productId);
 			renderCartProduct(await readProduct());
 		});
+	});
+
+	// Apply Promo Code
+	const promoApplyBtn = document.getElementById("apply-promo-btn");
+	promoApplyBtn.addEventListener("click", async () => {
+		const promoCodeInput = document.getElementById("promo-code-input").value;
+		const verifyResult = await verifyPromoCode(promoCodeInput);
+		console.log("Promo code verify result:", verifyResult);
+
+		// Apply discount if valid
+		if (verifyResult) {
+			promoDiscount = subtotalAmount - verifyResult.discount || 0;
+			calculateTotals();
+		}
 	});
 };
 

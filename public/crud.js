@@ -80,4 +80,53 @@ const deleteProduct = async (productId) => {
 		.catch((err) => console.log(err));
 };
 
-export { createProduct, readProduct, updateProduct, deleteProduct };
+// Read: Retrieve promo code details
+const readPromoCode = async (enteredCode) => {
+	// console.log("1. Starting readPromoCode with code:", enteredCode);
+	// console.log(
+	// 	"1a. Code type:",
+	// 	typeof enteredCode,
+	// 	"Length:",
+	// 	enteredCode.length
+	// );
+
+	try {
+		const url = `/promoCode/${enteredCode}`;
+		// console.log("2. About to fetch:", url);
+
+		const response = await fetch(url);
+
+		// console.log("3. Fetch promo code response:", response);
+		// console.log("4. Response status:", response.status, "OK:", response.ok);
+
+		if (!response.ok) {
+			// console.log("5. Invalid promo code response");
+			return null;
+		}
+
+		// console.log("6. About to parse JSON");
+		const data = await response.json();
+		// console.log("7. Fetch promo code result:", data);
+
+		// Check if API returned false for invalid code
+		if (data === false) {
+			// console.log("8. Promo code not found");
+			return null;
+		}
+
+		// console.log("9. Returning valid promo data");
+		return data;
+	} catch (err) {
+		// console.error("10. Network error:", err);
+		// console.error("10a. Error details:", err.message, err.stack);
+		return null;
+	}
+};
+
+export {
+	createProduct,
+	readProduct,
+	updateProduct,
+	deleteProduct,
+	readPromoCode
+};

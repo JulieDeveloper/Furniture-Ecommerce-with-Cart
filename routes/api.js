@@ -23,7 +23,7 @@ router.post("/cartProduct", async (req, res) => {
 			data: req.body
 		});
 		res.send(cartList);
-		console.log("Api.js ––– Created cart product:", cartList);
+		// console.log("Api.js ––– Created cart product:", cartList);
 	} catch (err) {
 		res.status(500).send(err);
 	}
@@ -35,7 +35,7 @@ router.get("/cartProducts", async (req, res) => {
 		// fetch first 10 records from the database with no filter
 		const result = await prisma[model_CartProduct].findMany();
 		res.send(result);
-		console.log("Api.js ––– Fetched cart products:", result);
+		// console.log("Api.js ––– Fetched cart products:", result);
 	} catch (err) {
 		console.log(err);
 		res.status(500).send(err);
@@ -65,7 +65,7 @@ router.delete("/cartProduct/:id", async (req, res) => {
 		const result = await prisma[model_CartProduct].delete({
 			where: { id: req.params.id }
 		});
-		console.log("Api.js ––– Delete - ID:", req.params.id);
+		// console.log("Api.js ––– Delete - ID:", req.params.id);
 
 		res.send(result);
 	} catch (err) {
@@ -81,11 +81,17 @@ router.delete("/cartProduct/:id", async (req, res) => {
 // READ one promo code by code
 router.get("/promoCode/:code", async (req, res) => {
 	try {
+		console.log("Api.js ––– read promo code:", req.params.code);
+		console.log("Api.js ––– read promo req:", req.body);
+
 		const result = await prisma[model_promoCode].findFirst({
 			where: { promoCode: req.params.code }
 		});
+		console.log("result:", result);
 		if (!result) {
-			return false;
+			console.log("*** Promo code not found:", req.params.code);
+
+			return res.json(false);
 		}
 
 		res.send(result);
