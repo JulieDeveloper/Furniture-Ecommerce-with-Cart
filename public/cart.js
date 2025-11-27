@@ -1,8 +1,70 @@
 import { readProduct, updateProduct, deleteProduct } from "./crud.js";
 import { verifyPromoCode } from "./promo.js";
 
+let cartProducts = {};
 const cartList_HTML = document.getElementById("cart-products-list");
+let subtotalAmount = 0;
+let taxAmount = 0;
+let totalBeforeTax = 0;
+let totalAfterTax = 0;
+let deliveryFee = 0;
+let promoDiscount = 0;
 
+const displayAmounts = () => {
+	const itemsSubtotal_HTML = document.getElementById("itemSubtotal_HTML");
+	const subtotal_HTML = document.getElementById("subtotal-value_HTML");
+	const discount_HTML = document.getElementById("discount_HTML");
+	const deliveryOption_HTML = document.getElementById("shipping-label_HTML");
+	const deliveryFee_HTML = document.getElementById("delivery-fee_HTML");
+	const totalBeforeTax_HTML = document.getElementById("total-before-tax_HTML");
+	const tax_HTML = document.getElementById("tax-value_HTML");
+	const totalAfterTax_HTML = document.getElementById("total-after-tax_HTML");
+
+	// Subtotal
+	itemsSubtotal_HTML.innerText = `$${subtotalAmount.toFixed(2)}`;
+	subtotal_HTML.innerText = `$${subtotalAmount.toFixed(2)}`;
+
+	// Delivery Fee
+	if (deliveryOption_HTML.innerText === "Home Delivery") {
+		deliveryFee = 120;
+	} else if (deliveryOption_HTML.innerText === "Store Pickup") {
+		deliveryFee = 0;
+	}
+	deliveryFee_HTML.innerText = `$${deliveryFee.toFixed(2)}`;
+
+	// Promo Discount
+	if (promoDiscount) {
+		discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+	}
+
+	// Before Tax Totals
+	totalBeforeTax_HTML.innerText = `$${totalBeforeTax.toFixed(2)}`;
+
+	// Tax
+	tax_HTML.innerText = `$${taxAmount.toFixed(2)}`;
+
+	// After Tax Totals
+
+	totalAfterTax_HTML.innerText = `$${totalAfterTax.toFixed(2)}`;
+};
+
+const calculateTotals = () => {
+	// Promo Discount
+	discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+
+	// Before Tax Totals
+	totalBeforeTax = subtotalAmount + deliveryFee - promoDiscount;
+
+	// Tax
+	taxAmount = totalBeforeTax * 0.13;
+
+	// After Tax Totals
+	totalAfterTax = totalBeforeTax + taxAmount;
+
+	displayAmounts();
+};
+
+// Attach event listeners to buttons
 const attachEventListeners = () => {
 	// Decrease cart Quantity
 	const decreaseQtyButtons = document.querySelectorAll(".decrease-qty-btn");
@@ -57,14 +119,39 @@ const attachEventListeners = () => {
 		// Apply discount if valid
 		if (verifyResult) {
 			promoDiscount = subtotalAmount - verifyResult.discount || 0;
+			console.log("Applied promo discount:", promoDiscount);
 			calculateTotals();
 		}
 	});
+
+	// Change Delivery Option
+	const deliveryRadios = document.querySelectorAll(
+		'input[name="delivery-pickup"]'
+	);
+
+	deliveryRadios.forEach((radio) => {
+		radio.addEventListener("change", () => {
+			console.log("Selected:", radio.value);
+			if (radio.value === "delivery") {
+				deliveryOption_HTML.innerText = "Home Delivery";
+				deliveryFee = 120;
+			} else if (radio.value === "pickup") {
+				deliveryOption_HTML.innerText = "Store Pickup";
+				deliveryFee = 0;
+			}
+			calculateTotals();
+		});
+	});
 };
 
+// Render cart products
 const renderCartProduct = (data) => {
 	let cartProductHTML = data.length ? `` : "no items in cart";
+	let returnSubtotal = 0;
+
 	data.forEach((product) => {
+		returnSubtotal += product.price * product.qty;
+
 		const deliveryAvailability = product.deliveryAvailability
 			? `<div class="available-status-circle green"></div>
             <p class="content">Available For Delivery</p>`
@@ -117,6 +204,8 @@ const renderCartProduct = (data) => {
 
 	cartList_HTML.innerHTML = cartProductHTML;
 	attachEventListeners();
+	subtotalAmount = returnSubtotal;
+	calculateTotals();
 };
 
 // Initial render

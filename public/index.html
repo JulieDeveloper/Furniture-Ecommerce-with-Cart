@@ -433,14 +433,14 @@
         <div class="collapse-content">
           <fieldset>
             <div class="delivery-option">
-              <input type="radio" id="delivery" name="delivery-pickup" value="delivery" checked />
+              <input type="radio" id="delivery" name="delivery-option-inputs" value="delivery" checked />
               <label for="delivery">
                 <p class="main"><b>Delivery</b> $120</p>
                 <p class="description">Delivered in 2–4 Weeks</p>
               </label>
             </div>
             <div class="pickup-option">
-              <input type="radio" id="pickup" name="delivery-pickup" value="pickup" />
+              <input type="radio" id="pickup" name="delivery-option-inputs" value="pickup" />
               <label for="pickup">
                 <p class="main"><b>Store PickUp</b> Free</p>
                 <p class="description">Anytime During Opening Hour</p>
@@ -459,20 +459,20 @@
         </div>
         <!-- promo -->
         <div class="promo-row cart-summary-row">
-          <p id="promo-label_HTML">Promo Code: 10% OFF</p>
-          <p id="itemSubtotal_HTML" class="cart-align-right">– $60.00</p>
+          <p>Promo Discount: <span id="promo-label_HTML">10% OFF</span></p>
+          <p id="discount_HTML" class="cart-align-right">– $60.00</p>
         </div>
         <!-- shipping/pickup -->
         <div class="shipping-row cart-summary-row">
           <p id="shipping-label_HTML">Home Delivery</p>
-          <p id="shipping-value_HTML" class="cart-align-right">+ $25.80</p>
+          <p id="delivery-fee_HTML" class="cart-align-right">+ $25.80</p>
         </div>
         <div class="divide-line"></div>
 
         <!-- total before tax -->
         <div class="total-before-tax-row cart-summary-row">
           <p>Total Before Tax</p>
-          <p id="total-before-tax-value_HTML" class="cart-align-right">$565.80</p>
+          <p id="total-before-tax_HTML" class="cart-align-right">$565.80</p>
         </div>
         <!-- tax -->
         <div class="tax-row cart-summary-row">
@@ -482,7 +482,7 @@
         <!-- total -->
         <div class="total-row cart-summary-row">
           <p><b>TOTAL</b></p>
-          <p id="total-value_HTML"><b>$745.80</b></p>
+          <p id="total-after-tax_HTML"><b>$745.80</b></p>
         </div>
 
       </div>
