@@ -8,8 +8,9 @@ let taxAmount = 0;
 let totalBeforeTax = 0;
 let totalAfterTax = 0;
 let deliveryFee = 120;
-let promoAfterDiscount = 0;
+let subtotalAfterDiscount = 0;
 let promoDiscount = 0;
+let promoDiscountRate = 0;
 
 const displayAmounts = () => {
 	const itemsSubtotal_HTML = document.getElementById("itemSubtotal_HTML");
@@ -27,37 +28,64 @@ const displayAmounts = () => {
 
 	// Delivery Fee
 	console.log("Delivery Fee:", deliveryFee);
-	if (deliveryFee === 120) {
+	if (deliveryFee === 120 && subtotalAmount > 0) {
 		deliveryFee_HTML.innerText = `+ $${deliveryFee.toFixed(2)}`;
-	} else if (deliveryFee === 0) {
+	} else if (subtotalAmount < 1) {
+		deliveryFee_HTML.innerText = `–`;
+	} else {
 		deliveryFee_HTML.innerText = `Free`;
 	}
 
 	// Promo Discount
-	if (promoAfterDiscount) {
-		discount_HTML.innerText = `– $${promoAfterDiscount.toFixed(2)}`;
+	if (promoDiscount) {
+		discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
 	} else {
-		discount_HTML.innerText = "";
+		discount_HTML.innerText = "–";
 	}
 
 	// Before Tax Totals
-	totalBeforeTax_HTML.innerText = `$${totalBeforeTax.toFixed(2)}`;
+	if (subtotalAmount < 1) {
+		totalBeforeTax_HTML.innerText = `–`;
+	} else {
+		totalBeforeTax_HTML.innerText = `$${totalBeforeTax.toFixed(2)}`;
+	}
 
 	// Tax
-	tax_HTML.innerText = `$${taxAmount.toFixed(2)}`;
+	if (subtotalAmount < 1) {
+		tax_HTML.innerText = `–`;
+	} else {
+		tax_HTML.innerText = `$${taxAmount.toFixed(2)}`;
+	}
 
 	// After Tax Totals
+	if (subtotalAmount < 1) {
+		totalAfterTax_HTML.innerText = `–`;
+	} else {
+		totalAfterTax_HTML.innerText = `$${totalAfterTax.toFixed(2)}`;
+	}
+};
 
-	totalAfterTax_HTML.innerText = `$${totalAfterTax.toFixed(2)}`;
+// Calculate promoDiscount
+const calculatePromoDiscount = () => {
+	if (promoDiscountRate) {
+		promoDiscount = subtotalAmount * (1 - promoDiscountRate);
+	} else {
+		promoDiscount = 0;
+	}
+
+	return promoDiscount;
 };
 
 const calculateTotals = () => {
 	// Promo Discount
-	promoAfterDiscount = subtotalAmount - subtotalAmount * promoDiscount || 0;
-	discount_HTML.innerText = `– $${promoAfterDiscount.toFixed(2)}`;
+	calculatePromoDiscount();
+	subtotalAfterDiscount = subtotalAmount + promoDiscount;
+	discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
+	console.log("Subtotal after discount:", subtotalAfterDiscount);
 
 	// Before Tax Totals
-	totalBeforeTax = subtotalAmount + deliveryFee - promoAfterDiscount;
+	totalBeforeTax = subtotalAfterDiscount + deliveryFee;
+	console.log("Total before tax:", totalBeforeTax);
 
 	// Tax
 	taxAmount = totalBeforeTax * 0.13;
@@ -95,7 +123,7 @@ const attachEventListeners = () => {
 
 			const newQty = Number(productQty) + 1;
 			await updateProduct(productId, newQty);
-
+			calculateTotals();
 			renderCartProduct(await readProduct());
 		});
 	});
@@ -109,6 +137,7 @@ const attachEventListeners = () => {
 			console.log(`remove dataset id: ${productId}`);
 
 			await deleteProduct(productId);
+			calculateTotals();
 			renderCartProduct(await readProduct());
 		});
 	});
@@ -122,9 +151,10 @@ const attachEventListeners = () => {
 
 		// Apply discount if valid
 		if (verifyResult) {
-			promoDiscount = verifyResult.discount;
-			promoAfterDiscount = subtotalAmount - promoDiscount || 0;
-			console.log("Applied promo discount:", promoAfterDiscount);
+			promoDiscountRate = verifyResult.discount;
+			calculatePromoDiscount();
+			subtotalAfterDiscount = subtotalAmount - promoDiscount || 0;
+			console.log("Applied promo discount:", promoDiscount);
 			calculateTotals();
 		}
 	});
