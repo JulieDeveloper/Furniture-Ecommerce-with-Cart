@@ -185,6 +185,19 @@ const renderCartProduct = (data) => {
 	let cartProductHTML = data.length ? `` : "no items in cart";
 	let returnSubtotal = 0;
 
+	// update nav cart number
+	const navCartNum_HTML = document.getElementById("nav-cart-num");
+	const cartFooter_HTML = document.getElementById("cart-footer_HTML");
+
+	if (data.length < 1) {
+		navCartNum_HTML.innerText = ``;
+		cartList_HTML.style = "padding-top: 20px; padding-left: 20px;";
+		cartFooter_HTML.style.display = "none";
+	} else {
+		navCartNum_HTML.innerText = `(${data.length})`;
+		cartFooter_HTML.style.display = "block";
+	}
+
 	data.forEach((product) => {
 		returnSubtotal += product.price * product.qty;
 
