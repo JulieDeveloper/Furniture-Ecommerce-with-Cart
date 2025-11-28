@@ -33,7 +33,6 @@ const renderProducts = (products) => {
                     <h2 class="product-name">${product.name}</h2>
                     <p class="product-price">$${product.price.toFixed(2)}</p>
                 </div>
-                <div class="add-to-cart-btn">+</div>
             </div>
         </div>
         `;
