@@ -32,16 +32,14 @@ const readProduct = async () => {
 	return fetch("/cartProducts", { method: "GET" })
 		.then(async (response) => {
 			if (!response.ok) {
-				// turn on an error notice in case of any server error
-				document.querySelector("#notices").style.display = "block";
+				console.error("Failed to fetch cart products - status:", response.status);
 				return [];
 			}
 			console.log("Fetch cart products response:", response);
 			return response.json();
 		})
 		.catch((err) => {
-			console.log(err);
-			document.querySelector("#notices").style.display = "block";
+			console.error("Error fetching cart products:", err);
 			return [];
 		});
 };
