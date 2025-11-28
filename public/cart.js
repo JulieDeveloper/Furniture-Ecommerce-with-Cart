@@ -147,6 +147,9 @@ const attachEventListeners = () => {
 	promoApplyBtn.addEventListener("click", async () => {
 		const promoCodeInput = document.getElementById("promo-code-input").value;
 		const verifyResult = await verifyPromoCode(promoCodeInput);
+		const promoLabel_HTML = document.getElementById("promo-label_HTML");
+		const discount_HTML = document.getElementById("discount_HTML");
+
 		console.log("Promo code verify result:", verifyResult);
 
 		// Apply discount if valid
@@ -156,9 +159,12 @@ const attachEventListeners = () => {
 			subtotalAfterDiscount = subtotalAmount - promoDiscount || 0;
 			console.log("Applied promo discount:", promoDiscount);
 		} else if (!verifyResult) {
+			console.log("refmnkermflkemrfklmerlkfmlekrmflkermflkemrfkl");
 			promoDiscountRate = 0;
 			subtotalAfterDiscount = subtotalAmount;
 			promoDiscount = 0;
+			discount_HTML.innerText = "–";
+			promoLabel_HTML.innerText = "";
 		}
 		calculateTotals();
 	});
