@@ -49,11 +49,14 @@ const readProduct = async () => {
 // UPDATE: Update an existing product in the shopping cart
 const updateProduct = async (productId, newQty) => {
 	try {
+		console.log(
+			`Updating product ID ${productId} with new quantity: ${newQty}`
+		);
 		const response = await fetch(`/cartProduct/${productId}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				qty: newQty,
+				qty: Number(newQty),
 				editedDate: new Date()
 			})
 		});
