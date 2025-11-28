@@ -155,8 +155,12 @@ const attachEventListeners = () => {
 			calculatePromoDiscount();
 			subtotalAfterDiscount = subtotalAmount - promoDiscount || 0;
 			console.log("Applied promo discount:", promoDiscount);
-			calculateTotals();
+		} else {
+			promoDiscountRate = 0;
+			subtotalAfterDiscount = subtotalAmount;
+			promoDiscount = 0;
 		}
+		calculateTotals();
 	});
 
 	// Change Delivery Option
