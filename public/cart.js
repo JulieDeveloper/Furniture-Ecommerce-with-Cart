@@ -79,7 +79,7 @@ const calculatePromoDiscount = () => {
 const calculateTotals = () => {
 	// Promo Discount
 	calculatePromoDiscount();
-	subtotalAfterDiscount = subtotalAmount + promoDiscount;
+	subtotalAfterDiscount = subtotalAmount - promoDiscount;
 	discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
 	console.log("Subtotal after discount:", subtotalAfterDiscount);
 
