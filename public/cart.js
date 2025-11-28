@@ -155,7 +155,7 @@ const attachEventListeners = () => {
 			calculatePromoDiscount();
 			subtotalAfterDiscount = subtotalAmount - promoDiscount || 0;
 			console.log("Applied promo discount:", promoDiscount);
-		} else {
+		} else if (!verifyResult) {
 			promoDiscountRate = 0;
 			subtotalAfterDiscount = subtotalAmount;
 			promoDiscount = 0;
