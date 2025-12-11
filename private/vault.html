@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="ie=edge"
+    >
+    <title>Vault</title>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Special+Elite&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <link
+        rel="icon"
+        href="/vault.svg"
+        sizes="any"
+        type="image/svg+xml"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/dompurify@3.3.0/dist/purify.min.js"
+        integrity="sha256-58sds9O7fxu83qHKg3dpDUACqVL3gbpuiDHIBn7eyOA="
+        crossorigin="anonymous"
+    ></script>
+
+</head>
+
+<body class="vault-page">
+
+    <!-- the "vault" id here uniquely identifies the page. JS will populate it accordingly -->
+    <main id="vault">
+        <header class="vault-header">
+            <img
+                id="logo"
+                src="/vault.svg"
+            />
+            <div class="vault-title">
+                <h1>Vault</h1>
+                <h3>Home of the Secret Sauce</h3>
+            </div>
+            <section id="profile"></section>
+        </header>
+
+        <section
+            id="content"
+            class="vault-content"
+        ></section>
+    </main>
+
+
+    <footer>
+        <p> You are viewing the protected Vault page. The <mark>/vault</mark>
+            route is guarded by Auth0's <code>requiresAuth()</code> middleware, and the
+            <mark>/api/secrets</mark> endpoint only returns data for authenticated users.
+        </p>
+        <p>NOTE: This is a demonstration only. Protecting your routes will not prevent people from
+            viewing otherwise public source code.</p>
+    </footer>
+
+    <script
+        src="/script.js"
+        type="module"
+    ></script>
+</body>
+
+</html>

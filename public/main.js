@@ -1,6 +1,8 @@
 import { createModal, closeModal } from "./productModal.js";
 import { fetchProducts } from "./fetchProduct.js";
 import { sortProducts } from "./sort.js";
+import { response } from "express";
+import { authentication } from "./authentication.js";
 
 const options = { method: "GET", headers: { "User-Agent": "insomnia/11.6.1" } };
 let rawProducts = [];
@@ -159,6 +161,9 @@ cartCloseBtn_HTML.addEventListener("click", () => {
 	const cartSidebar_HTML = document.getElementById("cart-section");
 	cartSidebar_HTML.style.right = "-500px"; // Hide cart
 });
+
+// Authentication Handling
+authentication();
 
 // Initial Fetch
 fetchProducts("all").then((products) => {

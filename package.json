@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \\\"Error: no test specified\\\" && exit 1",
-		"start": "node --env-file=.env server.js",
+		"start": "node --watch --env-file=.env server.js",
 		"setup": "npm install && npx prisma db pull --force && npx prisma generate",
 		"deploy": "npm ci && npx prisma generate"
 	},
@@ -14,7 +14,8 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^6.16.3",
-		"express": "^5.1.0",
+		"express": "^5.2.1",
+		"express-openid-connect": "^2.19.3",
 		"prisma": "^6.16.3"
 	},
 	"devDependencies": {
