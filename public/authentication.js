@@ -51,20 +51,7 @@ const authentication = async () => {
 	const displayName = data.name;
 	const profilePicture = data.picture;
 
-	// if (isLandingPage) {
-	// content.innerHTML = isAuthenticated
-	// 	? `<span class="secret-sauce">
-	//                 Your <a href="/vault">secret sauce</a> is ready.
-	//            </span>`
-	// 	: `<span class="secret-sauce">
-	//                 Have you tried our <a href="/vault">secret sauce</a>?
-	//            </span>`;
-
-	// }
-
 	if (isAuthenticated) {
-		// the vault endpoint only works for logged in users
-		// see also, the /api/secrets endpoint in ./server.js
 		try {
 			console.log("Rendering profile section for authenticated user.");
 			profile.innerHTML = `
@@ -75,25 +62,6 @@ const authentication = async () => {
         </div>
   </a>
     `;
-			// const response = await fetch("/api/secrets");
-			// const data = await response.json();
-			// const vaultHTML = `<span class="secret-sauce">
-			//       Here you go.
-			//       </span>
-			//       <ul class="items">
-			//           ${data
-			// 						.map(
-			// 							(item) =>
-			// 								`<li>
-			//               <a class="sauce" target="_blank" href="${item.url}">
-			//                   <span>${item.name}</span>
-			//               </a>
-			//           </li>`
-			// 						)
-			// 						.join("")}
-			//       </ul>`;
-
-			// content.innerHTML = DOMPurify.sanitize(vaultHTML);
 			console.log("render cart data here!!!!");
 		} catch (e) {
 			console.log(e);

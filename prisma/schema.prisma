@@ -7,8 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model cartProduct {
-  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+type UserCart {
+  id                   String   @map("_id")
   addedDate            DateTime @db.Date
   deliveryAvailability Boolean
   editedDate           DateTime @db.Date
@@ -22,6 +22,21 @@ model cartProduct {
   qty                  Int
 }
 
+model cartProduct {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  addedDate            DateTime @db.Date
+  deliveryAvailability Boolean
+  editedDate           DateTime @db.Date
+  img                  String
+  link                 String
+  materialAndSize      String
+  name                 String
+  pickupAvailability   Boolean
+  price                Float
+  productId            String
+  qty                  BigInt
+}
+
 model promoCode {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   active      Boolean
@@ -30,4 +45,15 @@ model promoCode {
   discount    Float
   endDate     DateTime @db.Date
   promoCode   String
+}
+
+model user {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  cart      UserCart[]
+  createdAt DateTime   @db.Date
+  email     String
+  givenName String
+  lastName  String
+  picture   String
+  sub       String     @unique(map: "sub_1")
 }

@@ -1,6 +1,7 @@
 import { createModal, closeModal } from "./productModal.js";
 import { fetchProducts } from "./fetchProduct.js";
 import { sortProducts } from "./sort.js";
+
 import {
 	checkAuth,
 	// authentication,
@@ -23,6 +24,15 @@ const modalCloseBtn = document.getElementById("close-modal-btn");
 // API endpoint
 let sortBy_Endpoint = "sort=newest";
 const BaseURL = "https://furniture-api.fly.dev/v1/products?limit=100";
+
+// Global auth state
+let currentUser = {
+	isAuthenticated: false,
+	name: "Guest",
+	email: "",
+	picture: "",
+	sub: null
+};
 
 // Render Products
 const renderProducts = (products) => {
@@ -153,11 +163,17 @@ pageNames.forEach((pageName) => {
 const navCart_HTML = document.getElementById("nav-cart_HTML");
 const cartCloseBtn_HTML = document.getElementById("close-cart-btn");
 
-navCart_HTML.addEventListener("click", () => {
+// Shopping Cart Toggle
+navCart_HTML.addEventListener("click", async () => {
+	console.log("Cart icon clicked");
 	const cartSidebar_HTML = document.getElementById("cart-section");
+
+	// If cart is open, close it
 	if (cartSidebar_HTML.style.right === "0px") {
 		cartSidebar_HTML.style.right = "-500px"; // Hide cart
-	} else {
+	}
+	// Otherwise, open cart (handles both "-500px" and empty string "")
+	else {
 		cartSidebar_HTML.style.right = "0px"; // Show cart
 	}
 });
@@ -165,6 +181,17 @@ cartCloseBtn_HTML.addEventListener("click", () => {
 	const cartSidebar_HTML = document.getElementById("cart-section");
 	cartSidebar_HTML.style.right = "-500px"; // Hide cart
 });
+
+// Hide Cart
+const controlCartBtnDisplay = async () => {
+	const isAuthenticated = await checkAuth();
+	const cartNav_HTML = document.getElementById("nav-cart_HTML");
+	if (isAuthenticated) {
+		cartNav_HTML.style.display = "flex";
+	} else {
+		cartNav_HTML.style.display = "none";
+	}
+};
 
 // Authentication Handling
 console.log("Checking authentication status...");
@@ -178,3 +205,31 @@ fetchProducts("all").then((products) => {
 	rawProducts = products; // Update rawProducts for modal functionality
 	renderProducts(products);
 });
+
+// Load user info from backend
+const loadUser = async () => {
+	try {
+		const res = await fetch("/api/user");
+		if (!res.ok) {
+			throw new Error("Failed to load user");
+		}
+		const data = await res.json();
+		currentUser = {
+			isAuthenticated: !!data.isAuthenticated,
+			sub: data.sub || null,
+			name: data.name || "Guest",
+			email: data.email || "",
+			picture: data.picture || "/assets/user.svg"
+		};
+	} catch (err) {
+		console.error("Error loading user:", err);
+	}
+};
+
+// Initialize app
+const init = async () => {
+	await loadUser();
+	await controlCartBtnDisplay(); // only show/enable access cart if logged in
+};
+
+init();

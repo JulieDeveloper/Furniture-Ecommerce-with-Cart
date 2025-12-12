@@ -1,130 +1,138 @@
 // Code References:https://github.com/ixd-system-design/todo-mongo-prisma/blob/main/public/script.js
 
-// CREATE: Add a product to the shopping cart
-// productData should contain all required fields from the cartProduct schema
+let currentUser = {
+	isAuthenticated: false,
+	sub: null,
+	cart: []
+};
+
+// Load user info from backend
+const loadUser = async () => {
+	try {
+		const res = await fetch("/api/user");
+		if (!res.ok) {
+			throw new Error("Failed to load user");
+		}
+		const data = await res.json();
+		currentUser = {
+			isAuthenticated: !!data.isAuthenticated,
+			sub: data.sub || null,
+			cart: data.cart || []
+		};
+	} catch (err) {
+		console.error("Error loading user:", err);
+	}
+};
+
+// CREATE: Add a product to the user's cart
 const createProduct = async (productData) => {
-	return fetch("/cartProduct", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify({
-			addedDate: productData.addedDate || new Date().toISOString(),
-			deliveryAvailability: productData.deliveryAvailability || false,
-			editedDate: productData.editedDate || new Date().toISOString(),
-			img: productData.img || "",
-			link: productData.link || "",
-			materialAndSize: productData.materialAndSize || "",
-			name: productData.name || "",
-			pickupAvailability: productData.pickupAvailability || false,
-			price: productData.price || 0,
-			productId: productData.productId || "",
-			qty: productData.qty || 1
-		})
-	})
-		.then((response) => {
-			if (!response.ok) throw new Error("Failed to create cart product");
-			return response.json();
-		})
-		.catch((err) => console.log(err));
-};
-
-// READ: Retrieve all products from the shopping cart
-const readProduct = async () => {
-	return fetch("/cartProducts", { method: "GET" })
-		.then(async (response) => {
-			if (!response.ok) {
-				console.error("Failed to fetch cart products - status:", response.status);
-				return [];
-			}
-			console.log("Fetch cart products response:", response);
-			return response.json();
-		})
-		.catch((err) => {
-			console.error("Error fetching cart products:", err);
-			return [];
+	try {
+		const response = await fetch("/api/userCart", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				addedDate: productData.addedDate || new Date().toISOString(),
+				deliveryAvailability: productData.deliveryAvailability || false,
+				editedDate: productData.editedDate || new Date().toISOString(),
+				img: productData.img || "",
+				link: productData.link || "",
+				materialAndSize: productData.materialAndSize || "",
+				name: productData.name || "",
+				pickupAvailability: productData.pickupAvailability || false,
+				price: productData.price || 0,
+				productId: productData.productId || "",
+				qty: productData.qty || 1
+			})
 		});
+
+		if (!response.ok) throw new Error("Failed to add product to cart");
+		return await response.json();
+	} catch (err) {
+		console.error(err);
+		return null;
+	}
 };
 
-// UPDATE: Update an existing product in the shopping cart
+// READ: Retrieve all products from the user's cart
+const readProduct = async () => {
+	try {
+		const response = await fetch("/api/userCart", { method: "GET" });
+
+		if (!response.ok) {
+			console.error("Failed to fetch cart - status:", response.status);
+			return [];
+		}
+
+		const data = await response.json();
+		console.log("Fetch user cart response:", data.cart);
+		return data.cart || [];
+	} catch (err) {
+		console.error("Error fetching cart:", err);
+		return [];
+	}
+};
+
+// UPDATE: Update a product's quantity in the user's cart
 const updateProduct = async (productId, newQty) => {
 	try {
 		console.log(
 			`Updating product ID ${productId} with new quantity: ${newQty}`
 		);
-		const response = await fetch(`/cartProduct/${productId}`, {
+
+		const response = await fetch(`/api/userCart/${productId}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				qty: Number(newQty),
-				editedDate: new Date()
+				editedDate: new Date().toISOString()
 			})
 		});
 
-		if (!response.ok) {
-			throw new Error("Failed to update cart product");
-		}
+		if (!response.ok) throw new Error("Failed to update cart product");
 		return await response.json();
 	} catch (err) {
 		console.error(err);
+		return null;
 	}
 };
 
-// DELETE: Remove a product from the shopping cart
+// DELETE: Remove a product from the user's cart
 const deleteProduct = async (productId) => {
-	return fetch(`/cartProduct/${productId}`, {
-		method: "DELETE",
-		headers: { "Content-Type": "application/json" }
-	})
-		.then((response) => {
-			if (!response.ok) throw new Error("Failed to delete cart product");
-			return response.json();
-		})
-		.catch((err) => console.log(err));
+	try {
+		const response = await fetch(`/api/userCart/${productId}`, {
+			method: "DELETE",
+			headers: { "Content-Type": "application/json" }
+		});
+
+		if (!response.ok) throw new Error("Failed to delete cart product");
+		return await response.json();
+	} catch (err) {
+		console.error(err);
+		return null;
+	}
 };
 
 // Read: Retrieve promo code details
 const readPromoCode = async (enteredCode) => {
-	// console.log("1. Starting readPromoCode with code:", enteredCode);
-	// console.log(
-	// 	"1a. Code type:",
-	// 	typeof enteredCode,
-	// 	"Length:",
-	// 	enteredCode.length
-	// );
-
 	try {
 		const url = `/promoCode/${enteredCode}`;
-		// console.log("2. About to fetch:", url);
-
 		const response = await fetch(url);
 
-		// console.log("3. Fetch promo code response:", response);
-		// console.log("4. Response status:", response.status, "OK:", response.ok);
+		if (!response.ok) return null;
 
-		if (!response.ok) {
-			// console.log("5. Invalid promo code response");
-			return null;
-		}
-
-		// console.log("6. About to parse JSON");
 		const data = await response.json();
-		// console.log("7. Fetch promo code result:", data);
+		if (data === false) return null;
 
-		// Check if API returned false for invalid code
-		if (data === false) {
-			// console.log("8. Promo code not found");
-			return null;
-		}
-
-		// console.log("9. Returning valid promo data");
 		return data;
 	} catch (err) {
-		// console.error("10. Network error:", err);
-		// console.error("10a. Error details:", err.message, err.stack);
+		console.error("Error fetching promo code:", err);
 		return null;
 	}
 };
 
 export {
+	loadUser,
+	currentUser,
 	createProduct,
 	readProduct,
 	updateProduct,

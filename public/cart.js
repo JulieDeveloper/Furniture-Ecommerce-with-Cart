@@ -1,7 +1,9 @@
 import { readProduct, updateProduct, deleteProduct } from "./crud.js";
 import { verifyPromoCode } from "./promo.js";
+import { checkAuth } from "./authentication.js";
 
-let cartProducts = {};
+const { isAuthenticated } = await checkAuth();
+
 const cartList_HTML = document.getElementById("cart-products-list");
 let subtotalAmount = 0;
 let taxAmount = 0;
@@ -192,7 +194,7 @@ const attachEventListeners = () => {
 
 // Render cart products
 const renderCartProduct = (data) => {
-	let cartProductHTML = data.length ? `` : "no items in cart";
+	let cartProductHTML = "";
 	let returnSubtotal = 0;
 
 	// update nav cart number
@@ -203,6 +205,7 @@ const renderCartProduct = (data) => {
 		navCartNum_HTML.innerText = ``;
 		cartList_HTML.style = "padding-top: 20px; padding-left: 20px;";
 		cartFooter_HTML.style.display = "none";
+		cartProductHTML = "no items in cart";
 	} else {
 		navCartNum_HTML.innerText = `(${data.length})`;
 		cartFooter_HTML.style.display = "block";
@@ -268,6 +271,11 @@ const renderCartProduct = (data) => {
 };
 
 // Initial render
+const init = async () => {
+	await controlCartBtnDisplay(); // only show/enable access cart if logged in
+};
+
+// init();
 renderCartProduct(await readProduct());
 
 export { renderCartProduct };

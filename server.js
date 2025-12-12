@@ -57,24 +57,7 @@ app.use(auth(config));
 // NOTE: OpenIdConnect attaches user data to all incoming requests
 // We can find this data at "req.oidc"
 
-// Publish the user's data and authentication state to the frontend
-app.get("/api/user", (req, res) => {
-	// If the user is logged in, send their data
-	if (req.oidc?.isAuthenticated()) {
-		res.send({
-			...req.oidc.user,
-			isAuthenticated: true
-		});
-	}
-	// If the user is not logged in,
-	// Inform the frontend that we have a Guest user.
-	else {
-		res.send({
-			name: "Guest",
-			isAuthenticated: false
-		});
-	}
-});
+// REMOVED: /api/user endpoint - now in routes/api.js
 
 // the private vault page
 app.get("/vault", requiresAuth(), (req, res) => {

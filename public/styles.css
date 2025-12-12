@@ -889,3 +889,20 @@ input[type="radio"]:checked::before {
 li.login-out-button {
 	padding: 0;
 }
+
+div.login-cart-warning {
+	padding: 20px;
+	border: 2px solid #000;
+	text-align: center;
+	font-size: 1.2rem;
+	margin: 20px;
+}
+div.login-cart-warning a.button {
+	margin-top: 10px;
+	padding: 10px 20px;
+	border: 2px solid #000;
+	background-color: #000;
+	color: #fff;
+	font-size: 1.2rem;
+	display: inline-block;
+}

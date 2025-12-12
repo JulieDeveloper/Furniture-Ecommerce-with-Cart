@@ -1,5 +1,6 @@
 import { createProduct, readProduct } from "./crud.js";
 import { renderCartProduct } from "./cart.js";
+import { checkAuth } from "./authentication.js";
 
 const createModal = (productData) => {
 	const testingData = {
@@ -137,6 +138,14 @@ const createModal = (productData) => {
 
 	// Add event listener for "ADD TO CART" button
 	addToCartBtn.addEventListener("click", async () => {
+		// Check auth before adding to cart
+		const isAuthenticated = await checkAuth();
+		if (!isAuthenticated) {
+			alert("Please log in to add items to your cart.");
+			// window.location.href = "/login";
+			return; // Stop execution
+		}
+
 		const quantity = parseInt(quantityInput.value) || 1;
 
 		// Prepare cart product data based on the product
