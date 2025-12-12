@@ -6,8 +6,18 @@ import express from "express";
 // Initialize Express app
 const app = express();
 
+// import path module to help with file paths
+import path from "path";
+
 // Serve static files from /public folder (useful when running Node locally, optional on Vercel).
 app.use(express.static("public"));
+
+// On Vercel, point the root url (/) to index.html explicitly
+if (process.env.VERCEL) {
+	app.get("/", (req, res) => {
+		res.sendFile(path.join(process.cwd(), "public", "index.html"));
+	});
+}
 
 // Define index.html as the root explicitly (useful on Vercel, optional when running Node locally).
 app.get("/", (req, res) => {

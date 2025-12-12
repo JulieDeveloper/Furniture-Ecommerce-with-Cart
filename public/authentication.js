@@ -1,3 +1,10 @@
+const checkAuth = async () => {
+	const response = await fetch("/api/user");
+	const data = await response.json();
+	console.log("Authentication data:", data);
+	return data;
+};
+
 const authentication = async () => {
 	const isLandingPage = document.getElementById("landing") ? true : false;
 	const isVaultPage = document.getElementById("vault") ? true : false;
@@ -78,4 +85,4 @@ const authentication = async () => {
 	}
 };
 
-export default authentication;
+export { checkAuth, authentication };
