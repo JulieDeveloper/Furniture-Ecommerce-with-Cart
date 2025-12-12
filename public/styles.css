@@ -867,3 +867,25 @@ input[type="radio"]:checked::before {
 	margin-left: 10px;
 	height: 25px;
 }
+
+/* Authentication */
+
+.avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-right: 10px;
+}
+
+.nav-user-profile a.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+li.login-out-button {
+	padding: 0;
+}

@@ -1,8 +1,12 @@
 import { createModal, closeModal } from "./productModal.js";
 import { fetchProducts } from "./fetchProduct.js";
 import { sortProducts } from "./sort.js";
-import { response } from "express";
-import { checkAuth, authentication } from "./authentication.js";
+import {
+	checkAuth,
+	// authentication,
+	renderAuthBtn,
+	renderProfile
+} from "./authentication.js";
 
 const options = { method: "GET", headers: { "User-Agent": "insomnia/11.6.1" } };
 let rawProducts = [];
@@ -163,7 +167,11 @@ cartCloseBtn_HTML.addEventListener("click", () => {
 });
 
 // Authentication Handling
-checkAuth();
+console.log("Checking authentication status...");
+const loginStatus = await checkAuth();
+renderAuthBtn();
+// authentication();
+renderProfile();
 
 // Initial Fetch
 fetchProducts("all").then((products) => {

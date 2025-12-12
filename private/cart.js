@@ -1,5 +1,5 @@
-import { readProduct, updateProduct, deleteProduct } from "./crud.js";
-import { verifyPromoCode } from "./promo.js";
+import { readProduct, updateProduct, deleteProduct } from "../public/crud.js";
+import { verifyPromoCode } from "../public/promo.js";
 
 let cartProducts = {};
 const cartList_HTML = document.getElementById("cart-products-list");
@@ -27,7 +27,7 @@ const displayAmounts = () => {
 	subtotal_HTML.innerText = `$${subtotalAmount.toFixed(2)}`;
 
 	// Delivery Fee
-	// console.log("Delivery Fee:", deliveryFee);
+	console.log("Delivery Fee:", deliveryFee);
 	if (deliveryFee === 120 && subtotalAmount > 0) {
 		deliveryFee_HTML.innerText = `+ $${deliveryFee.toFixed(2)}`;
 	} else if (subtotalAmount < 1) {
@@ -81,11 +81,11 @@ const calculateTotals = () => {
 	calculatePromoDiscount();
 	subtotalAfterDiscount = subtotalAmount - promoDiscount;
 	discount_HTML.innerText = `– $${promoDiscount.toFixed(2)}`;
-	// console.log("Subtotal after discount:", subtotalAfterDiscount);
+	console.log("Subtotal after discount:", subtotalAfterDiscount);
 
 	// Before Tax Totals
 	totalBeforeTax = subtotalAfterDiscount + deliveryFee;
-	// console.log("Total before tax:", totalBeforeTax);
+	console.log("Total before tax:", totalBeforeTax);
 
 	// Tax
 	taxAmount = totalBeforeTax * 0.13;
@@ -119,7 +119,7 @@ const attachEventListeners = () => {
 		button.addEventListener("click", async (e) => {
 			const productId = e.target.dataset.id;
 			const productQty = e.target.dataset.qty;
-			// console.log(`click "+"`);
+			console.log(`click "+"`);
 
 			const newQty = Number(productQty) + 1;
 			await updateProduct(productId, newQty);
@@ -133,8 +133,8 @@ const attachEventListeners = () => {
 	removeButtons.forEach((button) => {
 		button.addEventListener("click", async (e) => {
 			const productId = e.target.dataset.id;
-			// console.log(`click "Remove"`);
-			// console.log(`remove dataset id: ${productId}`);
+			console.log(`click "Remove"`);
+			console.log(`remove dataset id: ${productId}`);
 
 			await deleteProduct(productId);
 			calculateTotals();
@@ -150,16 +150,16 @@ const attachEventListeners = () => {
 		const promoLabel_HTML = document.getElementById("promo-label_HTML");
 		const discount_HTML = document.getElementById("discount_HTML");
 
-		// console.log("Promo code verify result:", verifyResult);
+		console.log("Promo code verify result:", verifyResult);
 
 		// Apply discount if valid
 		if (verifyResult) {
 			promoDiscountRate = verifyResult.discount;
 			calculatePromoDiscount();
 			subtotalAfterDiscount = subtotalAmount - promoDiscount || 0;
-			// console.log("Applied promo discount:", promoDiscount);
+			console.log("Applied promo discount:", promoDiscount);
 		} else if (!verifyResult) {
-			// console.log("refmnkermflkemrfklmerlkfmlekrmflkermflkemrfkl");
+			console.log("refmnkermflkemrfklmerlkfmlekrmflkermflkemrfkl");
 			promoDiscountRate = 0;
 			subtotalAfterDiscount = subtotalAmount;
 			promoDiscount = 0;
